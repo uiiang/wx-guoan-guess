@@ -1,0 +1,29 @@
+{
+  "name": "zanui-weapp",
+  "authors": [
+    "Nino <ninofocus@gmail.com>",
+    "Pangxie <pangxie@youzan.com>"
+  ],
+  "directory": "zanui-weapp",
+  "description": "A UI Library for Weapp",
+  "main": "zan",
+  "license": "MIT",
+  "homepage": "https://github.com/youzan/zanui-weapp",
+  "ignore": [
+    "**/.*",
+    "example",
+    "app.*",
+    "*.md"
+  ],
+  "version": "2.1.0",
+  "_release": "2.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.0",
+    "commit": "0c7035e8a1f1284704259d3e7cc13181b83c3ef6"
+  },
+  "_source": "https://github.com/youzan/zanui-weapp.git",
+  "_target": "^2.1.0",
+  "_originalSource": "https://github.com/youzan/zanui-weapp.git",
+  "_direct": true
+}

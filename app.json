@@ -1,0 +1,27 @@
+{
+  "pages":[
+    "pages/guess/guess",
+    "pages/ranking/ranking"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "国安比赛竞猜",
+    "navigationBarTextStyle":"white"
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "connectSocket": 20000,
+    "uploadFile": 20000,
+    "downloadFile": 20000
+  },
+  "tabBar": {  
+    "list": [{  
+      "pagePath": "pages/guess/guess",  
+      "text": "猜比分"  
+    }, {  
+      "pagePath": "pages/ranking/ranking",  
+      "text": "排行榜"  
+    }]  
+  }
+}

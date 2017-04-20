@@ -1,0 +1,13 @@
+/**app.wxss**/
+@import 'wa-ui.wxss';
+@import 'bower_components/zanui-weapp/dist/index.wxss';
+.container {
+  height: 100%;
+  align-items: flex-start;
+  justify-content: space-start;
+  padding-top: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  box-sizing: border-box;
+  background-color: #000000;
+} 
