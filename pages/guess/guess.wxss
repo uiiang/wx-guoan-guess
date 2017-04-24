@@ -99,18 +99,19 @@
 }
 .team-name{
   padding-top: 10rpx;
-  padding-bottom: 30rpx;
+  padding-bottom: 10rpx;
   color:white;
 }
 
 .match-info{
   padding-top: 10rpx;
+  padding-bottom: 10rpx;
   color:white;
   font-size: 80%;
 }
 
 .score-input{
-  height : 70px;
+  height : 60px;
   width: 70px;
   padding-top: 10px;
   background-color: black;
@@ -119,9 +120,66 @@
 }
 
 .score-colon{
-  height : 70px;
+  height : 60px;
   padding-top: 10px;
   text-align:center;
   font-size:300%;
   color:white;
+}
+
+.preview_result{
+  text-align:left;
+  color:white;
+  padding-left: 20px;
+}
+.preview_num{
+  text-align:right;
+  color:white;
+  padding-right: 20px;
+}
+.preview_column{
+  flex-direction: column;
+}
+.preview_row{
+  padding-top: 2px;
+  padding-bottom: 3px;
+  height:35rpx;
+}
+.preview_border{
+  border: 1px green;
+  border-style:hidden solid hidden solid; 
+}
+.preview_title{
+  background-color: green;
+  font-size:100%;
+}
+.preview_result_title{
+  background-color: white;
+  font-size:100%;
+  padding: 3px;
+}
+.vwdataeven{ /*偶数行*/ 
+  background-color: forestgreen; 
+}
+.vwdataodd{ /*奇数行*/ 
+  background-color: limegreen; 
+}
+.rule_explain_view{
+  margin-top: 20px;
+  margin-bottom: 20px;
+ border-radius: 5px;
+ background-color: darkgreen;
+ padding: 10px 10px 10px 10px;
+}
+.rule_explain_text{
+  font-size:100%; 
+  color:white;
+}
+
+
+.alert_info{
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+  color:red;
+  font-size: 80%;
 }

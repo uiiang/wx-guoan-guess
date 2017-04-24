@@ -1,0 +1,17 @@
+<view class="container">
+
+
+  <view class="userinfo ranking_view ">
+    <image class="userinfo-avatar" 
+    src="{{userInfo.avatarUrl}}" />
+    <view class="my_rankinfo">
+      <text class="userinfo-nickname ranking-row">{{userInfo.nickName}}</text>
+      <text class="ranking_text ranking-row">第5名</text>
+    </view>
+    <view class="score_text">99
+    </view>
+  </view>
+
+  <!--排行榜-->
+
+</view>

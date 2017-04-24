@@ -8,6 +8,7 @@
   padding-top: 20rpx;
   padding-left: 20rpx;
   padding-right: 20rpx;
+  padding-bottom: 20rpx;
   box-sizing: border-box;
   background-color: #000000;
 } 

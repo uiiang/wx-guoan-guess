@@ -3,6 +3,9 @@
 *  https://github.com/liujians/weapp-ui
 */
 /*general*/
+.border-basic{
+  border: 0px solid red
+}
 page{
   height: 100%;
 }
@@ -32,9 +35,6 @@ page view{
 .title{
   font-size: 36rpx;
   font-weight: bold;
-}
-.border-basic{
-  border: 0px solid red
 }
 .padding{
   padding:20rpx;

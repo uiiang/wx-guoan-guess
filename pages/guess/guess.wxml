@@ -1,14 +1,14 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"/>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
   <!--比赛信息显示区-->
     <!--双方队徽队名比赛时间地点-->
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <image class="emblems-image" src="../resources/test.png"/>
+        <image class="emblems-image" src="../resources/beijingguoan.png"/>
         <view class="team-name">{{match.home}}</view>
       </view>
       <view class="wa-grid-33 border-basic">
@@ -22,36 +22,97 @@
       </view>
       <!--客队信息-->
       <view class="wa-grid-33 border-basic emblems-grid">  
-        <image class="emblems-image" src="../resources/test.png"/>
+        <image class="emblems-image" src="../resources/guangzhouhengda.png"/>
         <view class="team-name">{{match.away}}</view>
       </view>
     </view>
-    <!--网友预测数据显示区-->
-
     <!--比分输入区域-->
-    <view class="wa-grid">
+    <form bindsubmit="formSubmit" data-endtime="{{match.end_time}}">
+      <view class="wa-grid">
+        <view class="wa-grid-33 border-basic">
+          <input class="score-input" 
+           disabled="{{overdue}}"
+            name="home"
+            style="float:right;text-align:right"
+            maxlength="2" 
+            type="number" 
+            placeholder="0"
+            placeholder-style="color:white;" />
+        </view>
+        <view class="wa-grid-33 border-basic">
+          <view class="score-colon">:</view>
+        </view>
+        <view class="wa-grid-33 border-basic">
+          <input class="score-input"
+           disabled="{{overdue}}"
+            name="away"
+            maxlength="2" 
+            type="number" 
+            placeholder="0"
+            placeholder-style="color:white;" />
+        </view>
+      </view>
+      <view>
+        <button disabled="{{overdue}}"
+          class="zan-btn zan-btn--large zan-btn--primary"
+          formType="submit">
+          {{!overdue?'确认':'来晚了,下回请早儿'}}
+        </button>
+      </view>
+      <view class="alert_info">
+        *开赛30分钟前可任意修改
+      </view>
+    </form>
+
+    <scroll-view scroll-y="true" style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+    <!--网友预测数据显示区-->
+    <view class="match-info text-center preview_title">
+      看看大家怎么猜的
+    </view>
+    <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <input class="score-input" 
-          style="float:right;text-align:right"
-          maxlength="2" 
-          type="number" 
-          placeholder="0"
-          placeholder-style="color:white;" />
+        <view class="preview_result_title">胜</view>
+        <block wx:for="{{result_home_win}}" 
+            wx:for-item="item" wx:key="item.result">
+            <view class="preview_row wa-grid {{index%2==0?'vwdataeven':'vwdataodd'}}">
+              <text class="preview_result wa-grid-50">{{item.result}}</text>
+              <text class="preview_num wa-grid-50">{{item.num >= 999?'999+':item.num}}</text>
+            </view>
+        </block>
+      </view>
+      <view class="wa-grid-33 border-basic preview_border">
+        <view class="preview_result_title">平</view>
+        <block wx:for="{{result_draw}}" 
+            wx:for-item="item" wx:key="item.result">
+            <view class="preview_row wa-grid {{index%2==0?'vwdataeven':'vwdataodd'}}">
+              <text class="preview_result wa-grid-50">{{item.result}}</text>
+              <text class="preview_num wa-grid-50">{{item.num >= 999?'999+':item.num}}</text>
+            </view>
+        </block>
       </view>
       <view class="wa-grid-33 border-basic">
-        <view class="score-colon">:</view>
-      </view>
-      <view class="wa-grid-33 border-basic">
-        <input class="score-input"
-          maxlength="2" 
-          type="number" 
-          placeholder="0"
-          placeholder-style="color:white;" />
+        <view class="preview_result_title">负</view>
+        <block wx:for="{{result_home_lose}}" 
+            wx:for-item="item" wx:key="item.result">
+            <view class="preview_row wa-grid {{index%2==0?'vwdataeven':'vwdataodd'}}">
+              <text class="preview_result wa-grid-50">{{item.result}}</text>
+              <text class="preview_num wa-grid-50">{{item.num >= 999?'999+':item.num}}</text>
+            </view>
+         </block>
       </view>
     </view>
-    <view>
-      <button class="zan-btn zan-btn--large zan-btn--primary">
-        确认
-      </button>
+
+    <!--规则说明-->
+    <view class="rule_explain_view">
+      <text class="rule_explain_text">规则说明:
+
+        0. 国安是冠军!!
+        1. 猜对胜平负和双方进球数, 得3分.
+        2. 猜对胜负和一方进球数,得2分.
+        3. 只猜对一方进球数,得1分.
+        4. 每场比赛开赛前30分钟,停止提交竞猜.
+        5. 每场比赛不限次数竞猜,但只以最后一次竞猜为准.
+      </text>
     </view>
+    </scroll-view>
 </view>

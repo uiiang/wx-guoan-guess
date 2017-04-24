@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/guess/guess",
-    "pages/ranking/ranking"
+    "pages/ranking/ranking",
+    "pages/guess/guess"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -16,11 +16,20 @@
     "downloadFile": 20000
   },
   "tabBar": {  
-    "list": [{  
+    "color": "white",
+    "selectedColor": "#BF8600",
+    "borderStyle": "white",
+    "backgroundColor": "black",
+    "position": "bottom",
+    "list": [{
+      "iconPath": "pages/resources/home.png",
       "pagePath": "pages/guess/guess",  
+      "selectedIconPath": "pages/resources/home.png",
       "text": "猜比分"  
     }, {  
+      "iconPath": "pages/resources/rank.png",
       "pagePath": "pages/ranking/ranking",  
+      "selectedIconPath": "pages/resources/rank.png",
       "text": "排行榜"  
     }]  
   }
