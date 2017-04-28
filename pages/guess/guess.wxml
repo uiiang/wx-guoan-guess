@@ -8,26 +8,26 @@
     <!--双方队徽队名比赛时间地点-->
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <image class="emblems-image" src="../resources/beijingguoan.png"/>
-        <view class="team-name">{{match.home}}</view>
+        <image class="emblems-image" src="../resources/{{match.homeEmblems}}"/>
+        <view class="team-name">{{match.homeTeam}}</view>
       </view>
       <view class="wa-grid-33 border-basic">
       <!--赛事名称-->
-        <view class="match-info">{{match.match_name}} {{match.match_round}}</view>
+        <view class="match-info">{{match.matchLevel}} 第{{match.roundNum}}轮</view>
         <view class="match-info" style="font-size:300%">VS</view>
       <!--比赛地点-->
-        <view class="match-info">{{match.locale}}</view>
+        <view class="match-info">{{match.stadiumName}}</view>
       <!--比赛时间-->
-        <view class="match-info">{{match.date}} {{match.time}}</view>
+        <view class="match-info">{{matchDateTimeStr}}</view>
       </view>
       <!--客队信息-->
       <view class="wa-grid-33 border-basic emblems-grid">  
-        <image class="emblems-image" src="../resources/guangzhouhengda.png"/>
-        <view class="team-name">{{match.away}}</view>
+        <image class="emblems-image" src="../resources/{{match.awayEmblems}}"/>
+        <view class="team-name">{{match.awayTeam}}</view>
       </view>
     </view>
     <!--比分输入区域-->
-    <form bindsubmit="formSubmit" data-endtime="{{match.end_time}}">
+    <form bindsubmit="formSubmit" data-endtime="{{match.matchDateTime}}">
       <view class="wa-grid">
         <view class="wa-grid-33 border-basic">
           <input class="score-input" 

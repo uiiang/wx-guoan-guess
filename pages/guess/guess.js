@@ -2,12 +2,13 @@
 //获取应用实例
 var util = require('../../utils/util.js')
 var app = getApp()
-const URL = 'http://localhost:8080'
+const URL = 'http://127.0.0.1:8080'
 Page({
   data: {
     userInfo: {},
     match:{},
     endtime:{},
+    matchDateTimeStr:{},
     overdue:false
   },
 
@@ -34,12 +35,14 @@ Page({
         console.log(res.data)
         that.setData({
           match: res.data[0],
-          overdue:Date.parse(new Date()) / 1000>res.data[0].end_time
+          matchDateTimeStr:util.formatDateTime(new Date(res.data[0].matchDateTime)),
+          overdue:Date.parse(new Date())>res.data[0].matchDateTime
         })
       },
       fail: () => console.error('something is wrong'),
       complete: () => console.log('match loaded')
-    }),
+    })
+    ,
     wx.request({
       url:URL+"/guess_preview",
       data:JSON.stringify({}),
@@ -77,11 +80,5 @@ Page({
     } else {
         awaygoal=event.detail.value.away
     }
-var timestamp = Date.parse(new Date());
-timestamp = timestamp / 1000;
-console.log(event.detail.value);
-console.log("当前时间戳为:" + timestamp);
-console.log("比赛开始时间戳:" + event.target.dataset.endtime);
-console.log("比赛开始时间戳:" + event.target.dataset.endtime);
   }
 })
