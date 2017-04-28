@@ -2,7 +2,7 @@
 //获取应用实例
 var util = require('../../utils/util.js')
 var app = getApp()
-const URL = 'http://192.168.1.5:3000'
+const URL = 'http://localhost:8080'
 Page({
   data: {
     userInfo: {},
@@ -25,7 +25,7 @@ Page({
       })
     }),
     wx.request({
-      url: URL+"/newmatch",
+      url: URL+"/nowmatch",
       data: JSON.stringify({}),
       header:{ 'content-type': 'application/json' },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
