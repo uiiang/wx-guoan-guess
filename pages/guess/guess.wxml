@@ -4,11 +4,13 @@
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"/>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
+    <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
   <!--比赛信息显示区-->
     <!--双方队徽队名比赛时间地点-->
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <image class="emblems-image" src="../resources/{{match.homeEmblems}}"/>
+        <image wx:if="{{match.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{match.homeEmblems}}"/>
+        <image wx:else class="emblems-image" src="../resources/csl.png"/>
         <view class="team-name">{{match.homeTeam}}</view>
       </view>
       <view class="wa-grid-33 border-basic">
@@ -21,8 +23,9 @@
         <view class="match-info">{{matchDateTimeStr}}</view>
       </view>
       <!--客队信息-->
-      <view class="wa-grid-33 border-basic emblems-grid">  
-        <image class="emblems-image" src="../resources/{{match.awayEmblems}}"/>
+      <view class="wa-grid-33 border-basic emblems-grid">
+        <image wx:if="{{match.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{match.awayEmblems}}"/>
+        <image wx:else class="emblems-image" src="../resources/csl.png"/>
         <view class="team-name">{{match.awayTeam}}</view>
       </view>
     </view>
@@ -64,7 +67,6 @@
       </view>
     </form>
 
-    <scroll-view scroll-y="true" style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
     <!--网友预测数据显示区-->
     <view class="match-info text-center preview_title">
       看看大家怎么猜的

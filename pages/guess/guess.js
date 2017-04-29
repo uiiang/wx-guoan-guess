@@ -2,7 +2,7 @@
 //获取应用实例
 var util = require('../../utils/util.js')
 var app = getApp()
-const URL = 'http://127.0.0.1:8080'
+const URL = 'http://192.168.1.4:8080'
 Page({
   data: {
     userInfo: {},
@@ -19,11 +19,26 @@ Page({
     var result_home_win="";
     var result_home_lose="";
     //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo,
-      })
+    //1、调用微信登录接口，获取code
+    wx.login({
+      success: function (r) {
+        var code = r.code;//登录凭证
+            console.log('login code = ' + code)
+        if (code) {
+          //2、调用获取用户信息接口
+          app.getUserInfo(function(userInfo){
+            console.log({encryptedData: userInfo.encryptedData, iv: userInfo.iv, code: code})
+            //更新数据
+            that.setData({
+              userInfo:userInfo,
+            })
+          })
+        } else {
+          console.log('获取用户登录态失败！' + r.errMsg)
+        }},
+        fail: function () {
+            callback(false)
+        }
     }),
     wx.request({
       url: URL+"/nowmatch",
