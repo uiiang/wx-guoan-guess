@@ -1,84 +1,80 @@
 //index.js
 //获取应用实例
 var util = require('../../utils/util.js')
+import { fetchNewMatch } from '../../utils/api';
 var app = getApp()
-const URL = 'http://192.168.1.4:8080'
 Page({
   data: {
     userInfo: {},
     match:{},
     endtime:{},
     matchDateTimeStr:{},
-    overdue:false
+    refreshing: false,
+    overdue:false,
+  },
+  onLoad(){
+    fetchNewMatch().then(res => {
+      console.log(app.globalData.userInfo);
+      this.setData({
+        match: res.matchInfo,
+        matchDateTimeStr:res.matchDateTimeStr,
+        overdue:res.overdue,
+        userInfo: app.globalData.userInfo
+      })
+    })
   },
 
-  onLoad: function () {
-    console.log('onLoad')
-    var that = this
-    var result_draw="";
-    var result_home_win="";
-    var result_home_lose="";
-    //调用应用实例的方法获取全局数据
-    //1、调用微信登录接口，获取code
-    wx.login({
-      success: function (r) {
-        var code = r.code;//登录凭证
-            console.log('login code = ' + code)
-        if (code) {
-          //2、调用获取用户信息接口
-          app.getUserInfo(function(userInfo){
-            console.log({encryptedData: userInfo.encryptedData, iv: userInfo.iv, code: code})
-            //更新数据
-            that.setData({
-              userInfo:userInfo,
-            })
-          })
-        } else {
-          console.log('获取用户登录态失败！' + r.errMsg)
-        }},
-        fail: function () {
-            callback(false)
-        }
-    }),
-    wx.request({
-      url: URL+"/nowmatch",
-      data: JSON.stringify({}),
-      header:{ 'content-type': 'application/json' },
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function(res){
-        console.log(res.data)
-        that.setData({
-          match: res.data[0],
-          matchDateTimeStr:util.formatDateTime(new Date(res.data[0].matchDateTime)),
-          overdue:Date.parse(new Date())>res.data[0].matchDateTime
-        })
-      },
-      fail: () => console.error('something is wrong'),
-      complete: () => console.log('match loaded')
-    })
-    ,
-    wx.request({
-      url:URL+"/guess_preview",
-      data:JSON.stringify({}),
-      header:{'content-type': 'application/json'},
-      method:'GET',
-      // header: {}, // 设置请求的 header
-      success: function(res){
-        that.setData({
-          result_draw: res.data[0].draw,
-          result_home_lose:res.data[0].home_lose,
-          result_home_win:res.data[0].home_win
-        })
-        console.log("res.data",res.data[0])
-        console.log("result_home_lose",result_home_lose)
-        console.log("result_draw",result_draw)
-        console.log("result_home_win",result_home_win)
-      },
-      fail: () => console.error('something is wrong'),
-      complete: () => console.log('match loaded')
-    })
-  },
+  // onLoad: function () {
+  //   console.log('onLoad')
+  //   var that = this
+  //   var result_draw="";
+  //   var result_home_win="";
+  //   var result_home_lose="";
+  //   //调用应用实例的方法获取全局数据
+  //   //1、调用微信登录接口，获取code
+  //   wx.login({
+  //     success: function (r) {
+  //       var code = r.code;//登录凭证
+  //           console.log('login code = ' + code)
+  //       if (code) {
+  //         //2、调用获取用户信息接口
+  //         app.getUserInfo(function(userInfo){
+  //           console.log({encryptedData: userInfo.encryptedData, iv: userInfo.iv, code: code})
+  //           //更新数据
+  //           that.setData({
+  //             userInfo:userInfo,
+  //           })
+  //         })
+  //       } else {
+  //         console.log('获取用户登录态失败！' + r.errMsg)
+  //       }},
+  //       fail: function () {
+  //           callback(false)
+  //       }
+  //   }),
+    
+  //   wx.request({
+  //     url:URL+"/guess_preview",
+  //     data:JSON.stringify({}),
+  //     header:{'content-type': 'application/json'},
+  //     method:'GET',
+  //     // header: {}, // 设置请求的 header
+  //     success: function(res){
+  //       that.setData({
+  //         result_draw: res.data[0].draw,
+  //         result_home_lose:res.data[0].home_lose,
+  //         result_home_win:res.data[0].home_win
+  //       })
+  //       console.log("res.data",res.data[0])
+  //       console.log("result_home_lose",result_home_lose)
+  //       console.log("result_draw",result_draw)
+  //       console.log("result_home_win",result_home_win)
+  //     },
+  //     fail: () => console.error('something is wrong'),
+  //     complete: () => console.log('match loaded')
+  //   })
+  // },
+
 
   formSubmit:function(event){
     var homegoal=0;

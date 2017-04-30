@@ -1,30 +1,42 @@
 //app.js
+import qcloud from './bower_components/wafer-client-sdk/index';
+import config from './config';
+
 App({
-  onLaunch: function () {
-    //调用API从本地缓存中获取数据
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
+  onLaunch() {
+    qcloud.setLoginUrl(config.service.loginUrl);
+    wx.getSystemInfo({
+      success: res => {
+        this.globalData.systemInfo = res;
+        this.globalData.rpx = res.windowWidth / 750;
+      },
+      fail: () => { }
+    });
+    this.doLogin();
+
   },
-  getUserInfo:function(cb){
-    var that = this
-    if(this.globalData.userInfo){
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    }else{
-      //调用登录接口
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
-            }
-          })
-        }
-      })
-    }
+  clearSession() {
+    // 清除保存在 storage 的会话信息
+    qcloud.clearSession();
+    console.log('会话已清除', result);
   },
-  globalData:{
-    userInfo:null
+  doLogin() {
+    qcloud.login({
+      success: result => {
+        console.log('登录成功', result);
+        this.globalData.userInfo = result;
+      },
+      fail: (error) => {
+        console.log('登录失败', error);
+      }
+    });
+  },
+  onShow() {
+  },
+  onHide() {
+    // 锁屏触发事件
+  },
+  globalData: {
+    userInfo: {},
   }
 })
