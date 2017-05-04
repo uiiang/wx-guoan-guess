@@ -19,7 +19,7 @@ function fetchNewMatch() {
   return API.GET(
     `${HOST}/nowmatch`,
     {},
-    {cache:true},
+    {cache:false,login:true},
   ).then(res=>{
       let data = res[0];
       // if (res.code !== 0) {
@@ -30,12 +30,62 @@ function fetchNewMatch() {
       let matchInfo={};
       let matchDateTimeStr={};
       ret.matchInfo = data;
-      ret.matchDateTimeStr = util.formatDateTime(new Date(data.matchDateTime));
-      ret.overdue=Date.parse(new Date())>data.matchDateTime;
+      ret.matchDateTimeStr = util.formatDateTime(new Date(data.matchSchedule.matchDateTime));
+      ret.overdue=Date.parse(new Date())>data.matchSchedule.matchDateTime;
       return ret;
   })
 }
 
+function fetchGuessPrev(matchid) {
+  console.log('fetchGuessPrev ' + matchid);
+  return API.GET(
+    `${HOST}/guesspre?id=`+matchid,
+    {},
+    {cache:false,login:true}
+  ).then(res=>{
+    console.log('fetchGuessPrev', res);
+    return res;
+  })
+}
+
+function checkUser(){
+  return API.GET(
+    `${HOST}/checkuser`,
+    {},
+    {cache:false,login:true},
+  ).then(res=>{
+      console.log('check user = ' , res);
+      let data = res.data.userInfo;
+      // if (res.code !== 0) {
+      //   showModel('好像出问题了', res);
+      //   return;
+      // }
+      let ret = {};
+      let openId = {};
+      ret.openId = data.openId;
+      // let matchInfo={};
+      // let matchDateTimeStr={};
+      // ret.matchInfo = data;
+      // ret.matchDateTimeStr = util.formatDateTime(new Date(data.matchDateTime));
+      // ret.overdue=Date.parse(new Date())>data.matchDateTime;
+      return ret;
+  })
+}
+
+
+function submitGuessScore(matchid,homeScore, awayScore, params) {
+  return API.POST(
+      `${HOST}/submitguess`,
+      params,{header: { 'content-Type': 'application/x-www-form-urlencoded' }}
+    )
+    .then(data => {
+      return data
+    })
+}
+
 module.exports = {
-  fetchNewMatch
+  fetchNewMatch:fetchNewMatch,
+  checkUser:checkUser,
+  submitGuessScore:submitGuessScore,
+  fetchGuessPrev:fetchGuessPrev
 }

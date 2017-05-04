@@ -13,7 +13,6 @@ App({
       fail: () => { }
     });
     this.doLogin();
-
   },
   clearSession() {
     // 清除保存在 storage 的会话信息
@@ -23,13 +22,22 @@ App({
   doLogin() {
     qcloud.login({
       success: result => {
-        console.log('登录成功', result);
+        console.log('登录成功..', result);
         this.globalData.userInfo = result;
       },
       fail: (error) => {
         console.log('登录失败', error);
       }
     });
+        //     //获取用户信息
+        // wx.getUserInfo({
+        //     success: function (res) {
+        //         //获取用户敏感数据密文和偏移向量
+        //         console.log('res.encryptedData' + res.encryptedData);
+        //         // that.setData({encryptedData: res.encryptedData});
+        //         // that.setData({iv: res.iv})
+        //     }
+        // });
   },
   onShow() {
   },

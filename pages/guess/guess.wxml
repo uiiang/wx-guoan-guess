@@ -9,28 +9,30 @@
     <!--双方队徽队名比赛时间地点-->
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <image wx:if="{{match.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{match.homeEmblems}}"/>
+        <image wx:if="{{match.matchSchedule.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.homeEmblems}}"/>
         <image wx:else class="emblems-image" src="../resources/csl.png"/>
-        <view class="team-name">{{match.homeTeam}}</view>
+        <view class="team-name">{{match.matchSchedule.homeTeam}}</view>
       </view>
       <view class="wa-grid-33 border-basic">
       <!--赛事名称-->
-        <view class="match-info">{{match.matchLevel}} 第{{match.roundNum}}轮</view>
+        <view class="match-info">{{match.matchSchedule.matchLevel}} 第{{match.matchSchedule.roundNum}}轮</view>
         <view class="match-info" style="font-size:300%">VS</view>
       <!--比赛地点-->
-        <view class="match-info">{{match.stadiumName}}</view>
+        <view class="match-info">{{match.matchSchedule.stadiumName}}</view>
       <!--比赛时间-->
         <view class="match-info">{{matchDateTimeStr}}</view>
       </view>
       <!--客队信息-->
       <view class="wa-grid-33 border-basic emblems-grid">
-        <image wx:if="{{match.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{match.awayEmblems}}"/>
+        <image wx:if="{{match.matchSchedule.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.awayEmblems}}"/>
         <image wx:else class="emblems-image" src="../resources/csl.png"/>
-        <view class="team-name">{{match.awayTeam}}</view>
+        <view class="team-name">{{match.matchSchedule.awayTeam}}</view>
       </view>
     </view>
     <!--比分输入区域-->
-    <form bindsubmit="formSubmit" data-endtime="{{match.matchDateTime}}">
+    <form bindsubmit="formSubmit" 
+    data-endtime="{{match.matchSchedule.matchDateTime}}" 
+    data-matchid="{{match.matchSchedule.id}}">
       <view class="wa-grid">
         <view class="wa-grid-33 border-basic">
           <input class="score-input" 
@@ -74,31 +76,28 @@
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
         <view class="preview_result_title">胜</view>
-        <block wx:for="{{result_home_win}}" 
-            wx:for-item="item" wx:key="item.result">
-            <view class="preview_row wa-grid {{index%2==0?'vwdataeven':'vwdataodd'}}">
-              <text class="preview_result wa-grid-50">{{item.result}}</text>
-              <text class="preview_num wa-grid-50">{{item.num >= 999?'999+':item.num}}</text>
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
+            <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
+              <text class="preview_result wa-grid-50">{{result_home_win[i].result}}</text>
+              <text class="preview_num wa-grid-50">{{result_home_win[i].count >= 999?'999+':result_home_win[i].count}}</text>
             </view>
         </block>
       </view>
       <view class="wa-grid-33 border-basic preview_border">
         <view class="preview_result_title">平</view>
-        <block wx:for="{{result_draw}}" 
-            wx:for-item="item" wx:key="item.result">
-            <view class="preview_row wa-grid {{index%2==0?'vwdataeven':'vwdataodd'}}">
-              <text class="preview_result wa-grid-50">{{item.result}}</text>
-              <text class="preview_num wa-grid-50">{{item.num >= 999?'999+':item.num}}</text>
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
+            <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
+              <text class="preview_result wa-grid-50">{{result_draw[i].result}}</text>
+              <text class="preview_num wa-grid-50">{{result_draw[i].count >= 999?'999+':result_draw[i].count}}</text>
             </view>
         </block>
       </view>
       <view class="wa-grid-33 border-basic">
         <view class="preview_result_title">负</view>
-        <block wx:for="{{result_home_lose}}" 
-            wx:for-item="item" wx:key="item.result">
-            <view class="preview_row wa-grid {{index%2==0?'vwdataeven':'vwdataodd'}}">
-              <text class="preview_result wa-grid-50">{{item.result}}</text>
-              <text class="preview_num wa-grid-50">{{item.num >= 999?'999+':item.num}}</text>
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
+            <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
+              <text class="preview_result wa-grid-50">{{result_home_lose[i].result}}</text>
+              <text class="preview_num wa-grid-50">{{result_home_lose[i].count >= 999?'999+':result_home_lose[i].count}}</text>
             </view>
          </block>
       </view>

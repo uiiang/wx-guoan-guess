@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 var util = require('../../utils/util.js')
-import { fetchNewMatch } from '../../utils/api';
+import { fetchNewMatch,checkUser,submitGuessScore,fetchGuessPrev } from '../../utils/api';
 var app = getApp()
 Page({
   data: {
@@ -11,6 +11,9 @@ Page({
     matchDateTimeStr:{},
     refreshing: false,
     overdue:false,
+    result_draw:{},
+    result_home_lose:{},
+    result_home_win:{},
   },
   onLoad(){
     fetchNewMatch().then(res => {
@@ -21,8 +24,26 @@ Page({
         overdue:res.overdue,
         userInfo: app.globalData.userInfo
       })
+
+      console.log('fetchNewMatch ',res.matchInfo.matchSchedule.id);
+
+      fetchGuessPrev(res.matchInfo.matchSchedule.id).then(res=>{
+        this.setData({
+          result_draw: res.draw,
+          result_home_lose:res.homeLose,
+          result_home_win:res.homeWin
+        })
+      })
+      // app.clearSession();
+    }),
+    checkUser().then(res=>{
+      console.log('checkUser ', res.openId);
     })
+    // fetchGuessPrev(this.match.matchSchedule.id).then(res=>{
+
+    // })
   },
+
 
   // onLoad: function () {
   //   console.log('onLoad')
@@ -77,8 +98,11 @@ Page({
 
 
   formSubmit:function(event){
+    console.log('event',event);
     var homegoal=0;
     var awaygoal=0;
+    var endtime = event.currentTarget.dataset.endtime;
+    var matchid = event.currentTarget.dataset.matchid;
     if(event.detail.value.home.length==0
       || event.detail.value.home < 0){
          homegoal=0
@@ -91,5 +115,27 @@ Page({
     } else {
         awaygoal=event.detail.value.away
     }
+
+    console.log('submit ' + homegoal + ':' + awaygoal
+      + ' matchid = ' + matchid + "  endtime = " + endtime);
+
+      let params = {
+        m: matchid,
+        h: homegoal,
+        a: awaygoal
+      };
+    submitGuessScore(matchid,homegoal,awaygoal,params).then(res => {
+        console.log(res);
+        wx.showToast({
+          title: "竞猜成功",
+          icon: "success",
+          duration: 2000
+        });
+      }).catch(() => {
+        wx.showToast({
+          title: "竞猜失败, 大概是服务器出错了吧",
+          duration: 2000
+        });
+      })
   }
 })

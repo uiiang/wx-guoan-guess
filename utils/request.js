@@ -49,6 +49,7 @@ export const request = (method = 'GET') => (url, data = {}, options = {}) => {
         login: options.login, // 请求之前是否登陆，如果该项指定为 true，会在请求之前进行登录
         data,
         method,
+        header: options.header,
         success: function(res) {
           if (options.cache) {
             cache.set(cacheKey, res.data);
