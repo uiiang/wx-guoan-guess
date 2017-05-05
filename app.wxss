@@ -12,3 +12,7 @@
   box-sizing: border-box;
   background-color: #000000;
 } 
+
+page {
+  background-color: #000000;
+  }

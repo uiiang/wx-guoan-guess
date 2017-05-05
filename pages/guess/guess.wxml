@@ -1,66 +1,57 @@
+
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"/>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" />
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
-    <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
-  <!--比赛信息显示区-->
+  <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+
+    <!--比赛信息显示区-->
+
     <!--双方队徽队名比赛时间地点-->
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <image wx:if="{{match.matchSchedule.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.homeEmblems}}"/>
-        <image wx:else class="emblems-image" src="../resources/csl.png"/>
+        <image wx:if="{{match.matchSchedule.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.homeEmblems}}" />
+        <image wx:else class="emblems-image" src="../resources/csl.png" />
         <view class="team-name">{{match.matchSchedule.homeTeam}}</view>
       </view>
       <view class="wa-grid-33 border-basic">
-      <!--赛事名称-->
+
+        <!--赛事名称-->
         <view class="match-info">{{match.matchSchedule.matchLevel}} 第{{match.matchSchedule.roundNum}}轮</view>
         <view class="match-info" style="font-size:300%">VS</view>
-      <!--比赛地点-->
+
+        <!--比赛地点-->
         <view class="match-info">{{match.matchSchedule.stadiumName}}</view>
-      <!--比赛时间-->
+
+        <!--比赛时间-->
         <view class="match-info">{{matchDateTimeStr}}</view>
       </view>
+
       <!--客队信息-->
       <view class="wa-grid-33 border-basic emblems-grid">
-        <image wx:if="{{match.matchSchedule.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.awayEmblems}}"/>
-        <image wx:else class="emblems-image" src="../resources/csl.png"/>
+        <image wx:if="{{match.matchSchedule.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.awayEmblems}}" />
+        <image wx:else class="emblems-image" src="../resources/csl.png" />
         <view class="team-name">{{match.matchSchedule.awayTeam}}</view>
       </view>
     </view>
+
     <!--比分输入区域-->
-    <form bindsubmit="formSubmit" 
-    data-endtime="{{match.matchSchedule.matchDateTime}}" 
-    data-matchid="{{match.matchSchedule.id}}">
+    <form bindsubmit="formSubmit" data-endtime="{{match.matchSchedule.matchDateTime}}" data-matchid="{{match.matchSchedule.id}}">
       <view class="wa-grid">
         <view class="wa-grid-33 border-basic">
-          <input class="score-input" 
-           disabled="{{overdue}}"
-            name="home"
-            style="float:right;text-align:right"
-            maxlength="2" 
-            type="number" 
-            placeholder="0"
-            placeholder-style="color:white;" />
+          <input class="score-input" disabled="{{overdue}}" name="home" style="float:right;text-align:right" maxlength="2" type="number" placeholder="0" placeholder-style="color:white;" />
         </view>
         <view class="wa-grid-33 border-basic">
           <view class="score-colon">:</view>
         </view>
         <view class="wa-grid-33 border-basic">
-          <input class="score-input"
-           disabled="{{overdue}}"
-            name="away"
-            maxlength="2" 
-            type="number" 
-            placeholder="0"
-            placeholder-style="color:white;" />
+          <input class="score-input" disabled="{{overdue}}" name="away" maxlength="2" type="number" placeholder="0" placeholder-style="color:white;" />
         </view>
       </view>
       <view>
-        <button disabled="{{overdue}}"
-          class="zan-btn zan-btn--large zan-btn--primary"
-          formType="submit">
+        <button disabled="{{overdue}}" class="zan-btn zan-btn--large zan-btn--primary" formType="submit">
           {{!overdue?'确认':'来晚了,下回请早儿'}}
         </button>
       </view>
@@ -77,43 +68,41 @@
       <view class="wa-grid-33 border-basic">
         <view class="preview_result_title">胜</view>
         <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
-            <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
-              <text class="preview_result wa-grid-50">{{result_home_win[i].result}}</text>
-              <text class="preview_num wa-grid-50">{{result_home_win[i].count >= 999?'999+':result_home_win[i].count}}</text>
-            </view>
+          <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
+            <text class="preview_result wa-grid-50">{{result_home_win[i].result}}</text>
+            <text class="preview_num wa-grid-50">{{result_home_win[i].count >= 999?'999+':result_home_win[i].count}}</text>
+          </view>
         </block>
       </view>
       <view class="wa-grid-33 border-basic preview_border">
         <view class="preview_result_title">平</view>
         <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
-            <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
-              <text class="preview_result wa-grid-50">{{result_draw[i].result}}</text>
-              <text class="preview_num wa-grid-50">{{result_draw[i].count >= 999?'999+':result_draw[i].count}}</text>
-            </view>
+          <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
+            <text class="preview_result wa-grid-50">{{result_draw[i].result}}</text>
+            <text class="preview_num wa-grid-50">{{result_draw[i].count >= 999?'999+':result_draw[i].count}}</text>
+          </view>
         </block>
       </view>
       <view class="wa-grid-33 border-basic">
         <view class="preview_result_title">负</view>
         <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
-            <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
-              <text class="preview_result wa-grid-50">{{result_home_lose[i].result}}</text>
-              <text class="preview_num wa-grid-50">{{result_home_lose[i].count >= 999?'999+':result_home_lose[i].count}}</text>
-            </view>
-         </block>
+          <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
+            <text class="preview_result wa-grid-50">{{result_home_lose[i].result}}</text>
+            <text class="preview_num wa-grid-50">{{result_home_lose[i].count >= 999?'999+':result_home_lose[i].count}}</text>
+          </view>
+        </block>
       </view>
     </view>
 
     <!--规则说明-->
     <view class="rule_explain_view">
-      <text class="rule_explain_text">规则说明:
-
-        0. 国安是冠军!!
-        1. 猜对胜平负和双方进球数, 得3分.
-        2. 猜对胜负和一方进球数,得2分.
-        3. 只猜对一方进球数,得1分.
-        4. 每场比赛开赛前30分钟,停止提交竞猜.
-        5. 每场比赛不限次数竞猜,但只以最后一次竞猜为准.
+      <text class="rule_explain_text">规则说明: 
+      1. 猜对胜平负和双方进球数, 得3分. 
+      2. 猜对胜负和一方进球数,得2分. 
+      3. 只猜对一方进球数,得1分. 
+      4. 每场比赛开赛前30分钟,停止提交竞猜. 
+      5. 每场比赛不限次数竞猜,但只以最后一次竞猜为准.
       </text>
     </view>
-    </scroll-view>
+  </scroll-view>
 </view>

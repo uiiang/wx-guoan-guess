@@ -1,13 +1,8 @@
-.userinfo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
 
 .userinfo-avatar {
-  width: 90rpx;
-  height: 90rpx;
-  margin: 20rpx;
+  width: 120rpx;
+  height: 120rpx;
+  margin: 5rpx;
   border-radius: 50%;
 }
 
@@ -16,24 +11,25 @@
   font-size: 130%;
 }
 
-.usermotto {
-  margin-top: 200px;
-}
 .ranking_view{
-  margin-top: 20px;
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border-radius: 5px;
   background-color: lightgray;
   padding: 10px 10px 10px 10px;
 }
 .my_rankinfo{
-  flex-direction: column;
+  flex-direction: row;
+  padding-left: 10px;
 }
 .ranking-row{
   display: flex;
   padding: 5rpx;
   width: 100%;
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 .ranking_text{
   color:dimgray;
@@ -42,5 +38,20 @@
 .score_text{
   font-size: 220%;
   color: orange;
-  text-align: right;
+  text-align: left;
+  position: absolute;
+  padding-right: 30px;
+  right: 2px;
+}
+.medal {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  padding-left: 5px;
+  padding-top: 3px;
+}
+.ranking_title{
+  font-size: 220%;
+  color: white;
+  text-align: center;
 }

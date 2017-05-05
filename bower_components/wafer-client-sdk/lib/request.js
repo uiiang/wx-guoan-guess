@@ -60,7 +60,6 @@ function request(options) {
 
     // 是否已经进行过重试
     var hasRetried = false;
-
     if (requireLogin) {
         doRequestWithLogin();
     } else {

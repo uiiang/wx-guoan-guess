@@ -1,17 +1,22 @@
 <view class="container">
-
-
-  <view class="userinfo ranking_view ">
-    <image class="userinfo-avatar" 
-    src="{{userInfo.avatarUrl}}" />
-    <view class="my_rankinfo">
-      <text class="userinfo-nickname ranking-row">{{userInfo.nickName}}</text>
-      <text class="ranking_text ranking-row">第5名</text>
-    </view>
-    <view class="score_text">99
-    </view>
+  <view class="ranking_title">
+    竞猜大神榜
   </view>
+  <block wx:for="{{ranking}}" wx:for-item="rankitem" wx:for-index="idx">
+    <view class="ranking_view">
+      <image wx:if="{{rankitem.playerInfo.avatarUrl.length>4}}" class="userinfo-avatar" src="{{rankitem.playerInfo.avatarUrl}}" />
+      <image wx:else class="userinfo-avatar" src="../resources/guoan_1.png" />
+      <view class="my_rankinfo">
+        <text class="userinfo-nickname ranking-row">{{rankitem.playerInfo.nickName}}</text>
+        <image class="medal" wx:if="{{idx==0}}" src="../resources/first.png"/>
+        <image class="medal" wx:if="{{idx==1}}" src="../resources/second.png"/>
+        <image class="medal" wx:if="{{idx==2}}" src="../resources/third.png"/>
+        <image class="medal" wx:if="{{idx==3}}" src="../resources/arsenal_1.png"/>
+        <text class="ranking_text ranking-row" wx:if="{{idx>3}}">第{{idx+1}}名</text>
+      </view>
+      <view class="score_text">{{rankitem.totalScore}}</view>
+    </view>
+  </block>
 
   <!--排行榜-->
-
 </view>
