@@ -47,6 +47,16 @@ Page({
     if (mschId == storageMschId) {
       var storageHomeGoal = wx.getStorageSync('home_goal');
       var storageAwayGoal = wx.getStorageSync('away_goal');
+      if (storageHomeGoal.length == 0 
+        || storageHomeGoal < 0 
+        || storageHomeGoal == "") {
+        storageHomeGoal = 0;
+      }
+      if (storageAwayGoal.length == 0 
+        || storageAwayGoal < 0 
+        || storageAwayGoal == "") {
+        storageAwayGoal = 0;
+      }
       console.log('storage Goal'
         , storageHomeGoal + ':' + storageAwayGoal);
       this.setData({
@@ -85,19 +95,19 @@ Page({
     console.log('event', event);
     var endtime = event.currentTarget.dataset.endtime;
     var matchid = event.currentTarget.dataset.matchid;
-    if ((event.detail.value.home.length == 0
-      || event.detail.value.home < 0)
-      && (this.home_goal.length == 0 || this.home_goal < 0)) {
-      this.home_goal = 0
-    } else {
+    console.log('event.detail.value.home.length ' , event.detail.value.home.length + ' ' + isNaN(event.detail.value.home))
+    console.log('event.detail.value.away.length ' , event.detail.value.away.length + ' ' +isNaN(event.detail.value.away))
+    if ((event.detail.value.home.length > 0
+      || event.detail.value.home!="")) {
       this.home_goal = event.detail.value.home
-    }
-    if ((event.detail.value.away.length == 0
-      || event.detail.value.away < 0)
-      && (this.away_goal.length == 0 || this.away_goal < 0)) {
-      this.away_goal = 0
     } else {
+      this.home_goal = wx.getStorageSync('home_goal');
+    }
+    if ((event.detail.value.away.length > 0
+      || event.detail.value.away!="")) {
       this.away_goal = event.detail.value.away
+    } else {
+      this.away_goal = wx.getStorageSync('away_goal');
     }
 
     console.log('submit ' + this.home_goal
@@ -118,16 +128,16 @@ Page({
           icon: "success",
           duration: 2000
         });
-        this.loadPrevData(matchid);
         wx.setStorageSync('home_goal', params.h);
         wx.setStorageSync('away_goal', params.a);
         wx.setStorageSync('matchid', matchid);
-      },
-      this.loadData()).catch(() => {
-        wx.showToast({
-          title: "竞猜失败, 大概是服务器出错了吧",
-          duration: 2000
-        });
-      })
+      }
+      // ,this.loadData()).catch(() => {
+      //   wx.showToast({
+      //     title: "竞猜失败, 大概是服务器出错了吧",
+      //     duration: 2000
+      //   });
+      // }
+      )
   }
 })

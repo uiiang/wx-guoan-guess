@@ -51,7 +51,7 @@
           style="float:right;text-align:right" 
           maxlength="2" 
           type="number" 
-          placeholder="{{home_goal}}" 
+          value="{{home_goal}}" 
           placeholder-style="color:white;" />
         </view>
         <view class="wa-grid-33 border-basic">
@@ -62,7 +62,7 @@
             disabled="{{overdue}}" 
             name="away" 
             maxlength="2" type="number" 
-            placeholder="{{away_goal}}" 
+            value="{{away_goal}}" 
             placeholder-style="color:white;" />
         </view>
       </view>
@@ -85,7 +85,7 @@
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
         <view class="preview_result_title">胜</view>
-        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i" wx:key="*this">
           <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
             <text class="preview_result wa-grid-50">{{result_home_win[i].result}}</text>
             <text class="preview_num wa-grid-50">{{result_home_win[i].count >= 999?'999+':result_home_win[i].count}}</text>
@@ -94,7 +94,7 @@
       </view>
       <view class="wa-grid-33 border-basic preview_border">
         <view class="preview_result_title">平</view>
-        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i" wx:key="*this">
           <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
             <text class="preview_result wa-grid-50">{{result_draw[i].result}}</text>
             <text class="preview_num wa-grid-50">{{result_draw[i].count >= 999?'999+':result_draw[i].count}}</text>
@@ -103,7 +103,7 @@
       </view>
       <view class="wa-grid-33 border-basic">
         <view class="preview_result_title">负</view>
-        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-item="i" wx:key="*this">
           <view class="preview_row wa-grid {{i%2==0?'vwdataeven':'vwdataodd'}}">
             <text class="preview_result wa-grid-50">{{result_home_lose[i].result}}</text>
             <text class="preview_num wa-grid-50">{{result_home_lose[i].count >= 999?'999+':result_home_lose[i].count}}</text>
