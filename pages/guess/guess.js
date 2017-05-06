@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 var util = require('../../utils/util.js')
-import { fetchNewMatch, submitGuessScore, fetchGuessPrev } from '../../utils/api';
+import { fetchNewMatch, submitGuessScore, fetchGuessPrev, fetchPlayerGuess } from '../../utils/api';
 var app = getApp()
 Page({
   data: {
@@ -14,8 +14,17 @@ Page({
     result_draw: {},//竞猜结果预览 平
     result_home_lose: {},//竞猜结果预览 输
     result_home_win: {},//竞猜结果预览 赢
+    home_goal: 0,//玩家预测的比分
+    away_goal: 0//玩家预测的客队比分
   },
   onLoad() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    this.loadData();
+  },
+
+  loadData: function () {
     fetchNewMatch().then(res => {
       this.setData({
         match: res.matchInfo,
@@ -24,57 +33,101 @@ Page({
         userInfo: app.globalData.userInfo
       })
 
-      console.log('fetchNewMatch ', res.matchInfo.matchSchedule.id);
+      wx.hideLoading();
+      console.log('fetchNewMatch mscheid='
+        , res.matchInfo.matchSchedule.id);
+      this.loadPlayerGuess(res.matchInfo.matchSchedule.id);
+      this.loadPrevData(res.matchInfo.matchSchedule.id);
+    })
+  },
 
-      fetchGuessPrev(res.matchInfo.matchSchedule.id).then(res => {
-        this.setData({
-          result_draw: res.draw,
-          result_home_lose: res.homeLose,
-          result_home_win: res.homeWin
-        })
+  loadPlayerGuess: function (mschId) {
+    var storageMschId = wx.getStorageSync('matchid');
+    console.log('storageMschId', storageMschId);
+    if (mschId == storageMschId) {
+      var storageHomeGoal = wx.getStorageSync('home_goal');
+      var storageAwayGoal = wx.getStorageSync('away_goal');
+      console.log('storage Goal'
+        , storageHomeGoal + ':' + storageAwayGoal);
+      this.setData({
+        home_goal: storageHomeGoal,
+        away_goal: storageAwayGoal
+      })
+    } else {
+      this.setData({
+        home_goal: 0,
+        away_goal: 0
+      })
+    }
+
+    // fetchPlayerGuess(mschId).then(res => {
+    //   this.setData({
+    //     home_goal: res.homeResult,
+    //     away_goal: res.awayResult,
+    //   })
+    // })
+  },
+
+  loadPrevData: function (mschId) {
+    fetchGuessPrev(mschId).then(res => {
+      this.setData({
+        result_draw: res.draw,
+        result_home_lose: res.homeLose,
+        result_home_win: res.homeWin
       })
     })
+  },
+  reload: function (event) {
+    this.loadData();
   },
 
   formSubmit: function (event) {
     console.log('event', event);
-    var homegoal = 0;
-    var awaygoal = 0;
     var endtime = event.currentTarget.dataset.endtime;
     var matchid = event.currentTarget.dataset.matchid;
-    if (event.detail.value.home.length == 0
-      || event.detail.value.home < 0) {
-      homegoal = 0
+    if ((event.detail.value.home.length == 0
+      || event.detail.value.home < 0)
+      && (this.home_goal.length == 0 || this.home_goal < 0)) {
+      this.home_goal = 0
     } else {
-      homegoal = event.detail.value.home
+      this.home_goal = event.detail.value.home
     }
-    if (event.detail.value.away.length == 0
-      || event.detail.value.away < 0) {
-      awaygoal = 0
+    if ((event.detail.value.away.length == 0
+      || event.detail.value.away < 0)
+      && (this.away_goal.length == 0 || this.away_goal < 0)) {
+      this.away_goal = 0
     } else {
-      awaygoal = event.detail.value.away
+      this.away_goal = event.detail.value.away
     }
 
-    console.log('submit ' + homegoal + ':' + awaygoal
-      + ' matchid = ' + matchid + "  endtime = " + endtime);
+    console.log('submit ' + this.home_goal
+      + ':' + this.away_goal
+      + ' matchid = ' + matchid
+      + "  endtime = " + endtime);
 
     let params = {
       m: matchid,
-      h: homegoal,
-      a: awaygoal
+      h: this.home_goal,
+      a: this.away_goal
     };
-    submitGuessScore(matchid, homegoal, awaygoal, params).then(res => {
-      console.log(res);
-      wx.showToast({
-        title: "竞猜成功",
-        icon: "success",
-        duration: 2000
-      });
-    }).catch(() => {
-      wx.showToast({
-        title: "竞猜失败, 大概是服务器出错了吧",
-        duration: 2000
-      });
-    })
+    submitGuessScore(matchid, this.home_goal, this.away_goal, params)
+      .then(res => {
+        console.log('submitGuessScore', res);
+        wx.showToast({
+          title: "竞猜成功",
+          icon: "success",
+          duration: 2000
+        });
+        this.loadPrevData(matchid);
+        wx.setStorageSync('home_goal', params.h);
+        wx.setStorageSync('away_goal', params.a);
+        wx.setStorageSync('matchid', matchid);
+      },
+      this.loadData()).catch(() => {
+        wx.showToast({
+          title: "竞猜失败, 大概是服务器出错了吧",
+          duration: 2000
+        });
+      })
   }
 })

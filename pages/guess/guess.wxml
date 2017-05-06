@@ -4,6 +4,7 @@
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" />
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <!--<text class="reload" bindtap="reload">刷新</text>-->
   </view>
   <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
 
@@ -12,12 +13,12 @@
     <!--双方队徽队名比赛时间地点-->
     <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <image wx:if="{{match.matchSchedule.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.homeEmblems}}" />
+        <image wx:if="{{match.matchSchedule.homeEmblems.length>4}}" 
+          class="emblems-image" src="../resources/{{match.matchSchedule.homeEmblems}}" />
         <image wx:else class="emblems-image" src="../resources/csl.png" />
         <view class="team-name">{{match.matchSchedule.homeTeam}}</view>
       </view>
       <view class="wa-grid-33 border-basic">
-
         <!--赛事名称-->
         <view class="match-info">{{match.matchSchedule.matchLevel}} 第{{match.matchSchedule.roundNum}}轮</view>
         <view class="match-info" style="font-size:300%">VS</view>
@@ -31,27 +32,44 @@
 
       <!--客队信息-->
       <view class="wa-grid-33 border-basic emblems-grid">
-        <image wx:if="{{match.matchSchedule.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{match.matchSchedule.awayEmblems}}" />
+        <image wx:if="{{match.matchSchedule.awayEmblems.length>4}}" 
+          class="emblems-image" src="../resources/{{match.matchSchedule.awayEmblems}}" />
         <image wx:else class="emblems-image" src="../resources/csl.png" />
         <view class="team-name">{{match.matchSchedule.awayTeam}}</view>
       </view>
     </view>
 
     <!--比分输入区域-->
-    <form bindsubmit="formSubmit" data-endtime="{{match.matchSchedule.matchDateTime}}" data-matchid="{{match.matchSchedule.id}}">
+    <form bindsubmit="formSubmit" 
+      data-endtime="{{match.matchSchedule.matchDateTime}}" 
+      data-matchid="{{match.matchSchedule.id}}">
       <view class="wa-grid">
         <view class="wa-grid-33 border-basic">
-          <input class="score-input" disabled="{{overdue}}" name="home" style="float:right;text-align:right" maxlength="2" type="number" placeholder="0" placeholder-style="color:white;" />
+          <input class="score-input" 
+          disabled="{{overdue}}" 
+          name="home" 
+          style="float:right;text-align:right" 
+          maxlength="2" 
+          type="number" 
+          placeholder="{{home_goal}}" 
+          placeholder-style="color:white;" />
         </view>
         <view class="wa-grid-33 border-basic">
           <view class="score-colon">:</view>
         </view>
         <view class="wa-grid-33 border-basic">
-          <input class="score-input" disabled="{{overdue}}" name="away" maxlength="2" type="number" placeholder="0" placeholder-style="color:white;" />
+          <input class="score-input" 
+            disabled="{{overdue}}" 
+            name="away" 
+            maxlength="2" type="number" 
+            placeholder="{{away_goal}}" 
+            placeholder-style="color:white;" />
         </view>
       </view>
       <view>
-        <button disabled="{{overdue}}" class="zan-btn zan-btn--large zan-btn--primary" formType="submit">
+        <button disabled="{{overdue}}" 
+          class="zan-btn zan-btn--large zan-btn--primary" 
+          formType="submit">
           {{!overdue?'确认':'来晚了,下回请早儿'}}
         </button>
       </view>

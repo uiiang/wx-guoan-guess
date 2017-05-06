@@ -33,16 +33,33 @@ function fetchNewMatch() {
     let matchDateTimeStr = {};
     ret.matchInfo = data;
     ret.matchDateTimeStr = util.formatDateTime(new Date(data.matchSchedule.matchDateTime));
-    ret.overdue = Date.parse(new Date()) > data.matchSchedule.matchDateTime;
+    ret.overdue = Date.parse(new Date()) > (data.matchSchedule.matchDateTime-30*60*1000);
+    return ret;
+  })
+}
+
+//获取玩家提交过的竞猜比分
+function fetchPlayerGuess(mschid){
+  console.log('fetchPlayerGuess ' + mschid);
+    return API.GET(
+    `${HOST}/getplresult?m=` + mschid,
+    {},
+    { cache: true, login: true }
+  ).then(res => {
+    let ret={};
+    if (res.code==0){
+      ret = res.data;
+    }
+    console.log('fetchPlayerGuess', res);
     return ret;
   })
 }
 
 //获取竞猜结果预览
-function fetchGuessPrev(matchid) {
-  console.log('fetchGuessPrev ' + matchid);
+function fetchGuessPrev(mschid) {
+  console.log('fetchGuessPrev ' + mschid);
   return API.GET(
-    `${HOST}/guesspre?id=` + matchid,
+    `${HOST}/guesspre?id=` + mschid,
     {},
     { cache: true, login: true }
   ).then(res => {
@@ -63,30 +80,6 @@ function fetchRanking() {
   })
 }
 
-function checkUser() {
-  return API.GET(
-    `${HOST}/checkuser`,
-    {},
-    { cache: false, login: true },
-  ).then(res => {
-    console.log('check user = ', res);
-    let data = res.data.userInfo;
-    // if (res.code !== 0) {
-    //   showModel('好像出问题了', res);
-    //   return;
-    // }
-    let ret = {};
-    let openId = {};
-    ret.openId = data.openId;
-    // let matchInfo={};
-    // let matchDateTimeStr={};
-    // ret.matchInfo = data;
-    // ret.matchDateTimeStr = util.formatDateTime(new Date(data.matchDateTime));
-    // ret.overdue=Date.parse(new Date())>data.matchDateTime;
-    return ret;
-  })
-}
-
 //提交比分
 function submitGuessScore(matchid, homeScore, awayScore, params) {
   return API.POST(
@@ -100,8 +93,8 @@ function submitGuessScore(matchid, homeScore, awayScore, params) {
 
 module.exports = {
   fetchNewMatch: fetchNewMatch,
-  checkUser: checkUser,
   submitGuessScore: submitGuessScore,
   fetchGuessPrev: fetchGuessPrev,
-  fetchRanking: fetchRanking
+  fetchRanking: fetchRanking,
+  fetchPlayerGuess:fetchPlayerGuess
 }
