@@ -1,9 +1,9 @@
 /**
  * 小程序配置文件
  */
-
+const version='v0.8.5';
 // 此处主机域名修改成腾讯云解决方案分配的域名
-// const host = 'http://10.73.136.141:8080';
+// const host = 'http://192.168.1.5:8080';
 const host = 'https://36715210.qcloud.la/guoan1992';
 
 /**
@@ -23,6 +23,7 @@ const config = {
 
   // 下面的地址配合云端 Demo 工作
   service: {
+    version,
     host,
     loginUrl: `${host}/login`,
     cosUrl: `https://${REGION}.file.myqcloud.com/files/v2/${APPID}/${BUCKET_NAME}/${DIR_NAME}`,

@@ -4,7 +4,7 @@
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" />
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    <!--<text class="reload" bindtap="reload">刷新</text>-->
+    <text class="reload" bindtap="reload">v0.8.5</text>
   </view>
   <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
 
@@ -51,7 +51,7 @@
           style="float:right;text-align:right" 
           maxlength="2" 
           type="number" 
-          value="{{home_goal}}" 
+          placeholder="{{home_goal}}" 
           placeholder-style="color:white;" />
         </view>
         <view class="wa-grid-33 border-basic">
@@ -62,7 +62,7 @@
             disabled="{{overdue}}" 
             name="away" 
             maxlength="2" type="number" 
-            value="{{away_goal}}" 
+            placeholder="{{away_goal}}" 
             placeholder-style="color:white;" />
         </view>
       </view>

@@ -20,7 +20,16 @@ Page({
   onLoad() {
     wx.showLoading({
       title: '加载中',
+      mask: true,
+      // fail: setTimeout
     })
+    // setTimeout(function () {
+    //   wx.hideLoading()
+    //   wx.showToast({
+    //     title: "服务器超时",
+    //     duration: 3000
+    //   });
+    // }, 1000)
     this.loadData();
   },
 
@@ -47,13 +56,13 @@ Page({
     if (mschId == storageMschId) {
       var storageHomeGoal = wx.getStorageSync('home_goal');
       var storageAwayGoal = wx.getStorageSync('away_goal');
-      if (storageHomeGoal.length == 0 
-        || storageHomeGoal < 0 
+      if (storageHomeGoal.length == 0
+        || storageHomeGoal < 0
         || storageHomeGoal == "") {
         storageHomeGoal = 0;
       }
-      if (storageAwayGoal.length == 0 
-        || storageAwayGoal < 0 
+      if (storageAwayGoal.length == 0
+        || storageAwayGoal < 0
         || storageAwayGoal == "") {
         storageAwayGoal = 0;
       }
@@ -95,49 +104,70 @@ Page({
     console.log('event', event);
     var endtime = event.currentTarget.dataset.endtime;
     var matchid = event.currentTarget.dataset.matchid;
-    console.log('event.detail.value.home.length ' , event.detail.value.home.length + ' ' + isNaN(event.detail.value.home))
-    console.log('event.detail.value.away.length ' , event.detail.value.away.length + ' ' +isNaN(event.detail.value.away))
+    console.log('event.detail.value.home.length ', event.detail.value.home.length + ' ' + isNaN(event.detail.value.home))
+    console.log('event.detail.value.away.length ', event.detail.value.away.length + ' ' + isNaN(event.detail.value.away))
     if ((event.detail.value.home.length > 0
-      || event.detail.value.home!="")) {
+      || event.detail.value.home !== "")) {
       this.home_goal = event.detail.value.home
     } else {
       this.home_goal = wx.getStorageSync('home_goal');
     }
     if ((event.detail.value.away.length > 0
-      || event.detail.value.away!="")) {
+      || event.detail.value.away !== "")) {
       this.away_goal = event.detail.value.away
     } else {
       this.away_goal = wx.getStorageSync('away_goal');
     }
 
-    console.log('submit ' + this.home_goal
-      + ':' + this.away_goal
-      + ' matchid = ' + matchid
-      + "  endtime = " + endtime);
+    if (this.home_goal == "") {
+      this.home_goal = 0;
+    }
+    if (this.away_goal == "") {
+      this.away_goal = 0;
+    }
+    if (util.isNotANumber(this.home_goal)
+      || util.isNotANumber(this.away_goal)) {
+      wx.showToast({
+        title: '请输入数字',
+        duration: 2000
+      })
+    } else {
+      console.log('submit ' + this.home_goal
+        + ':' + this.away_goal
+        + ' matchid = ' + matchid
+        + "  endtime = " + endtime);
 
-    let params = {
-      m: matchid,
-      h: this.home_goal,
-      a: this.away_goal
-    };
-    submitGuessScore(matchid, this.home_goal, this.away_goal, params)
-      .then(res => {
-        console.log('submitGuessScore', res);
-        wx.showToast({
-          title: "竞猜成功",
-          icon: "success",
-          duration: 2000
-        });
-        wx.setStorageSync('home_goal', params.h);
-        wx.setStorageSync('away_goal', params.a);
-        wx.setStorageSync('matchid', matchid);
-      }
-      // ,this.loadData()).catch(() => {
-      //   wx.showToast({
-      //     title: "竞猜失败, 大概是服务器出错了吧",
-      //     duration: 2000
-      //   });
-      // }
-      )
+      let params = {
+        m: matchid,
+        h: this.home_goal,
+        a: this.away_goal
+      };
+      submitGuessScore(matchid, this.home_goal, this.away_goal, params)
+        .then(res => {
+          if (res.code != 0) {
+            wx.showToast({
+              title: res.msg,
+              duration: 2000
+            });
+          } else {
+            console.log('submitGuessScore', res);
+            wx.showToast({
+              title: "竞猜成功",
+              icon: "success",
+              duration: 2000
+            });
+            wx.setStorageSync('home_goal', params.h);
+            wx.setStorageSync('away_goal', params.a);
+            wx.setStorageSync('matchid', matchid);
+          }
+        }
+        // ,this.loadData()).catch(() => {
+        //   wx.showToast({
+        //     title: "竞猜失败, 大概是服务器出错了吧",
+        //     duration: 2000
+        //   });
+        // }
+        )
+    }
   }
 })

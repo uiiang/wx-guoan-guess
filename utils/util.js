@@ -28,8 +28,15 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
+function isNotANumber(inputData) {
+  console.log('isNotANumber',inputData);
+  　　var re = /^[0-9]+[0-9]*]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/
+  return !re.test(inputData);
+}
+
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
-  formatDateTime:formatDateTime
+  formatDateTime:formatDateTime,
+  isNotANumber:isNotANumber
 }
