@@ -17,9 +17,13 @@ Page({
     home_goal: 0,//玩家预测的比分
     away_goal: 0//玩家预测的客队比分
   },
+  onPullDownRefresh: function () {
+    this.loadData();
+  },
   onLoad() {
     wx.showLoading({
       title: '加载中',
+      icon: 'loading',
       mask: true,
       // fail: setTimeout
     })
@@ -42,6 +46,12 @@ Page({
         userInfo: app.globalData.userInfo
       })
 
+      wx.stopPullDownRefresh({
+        complete: function (res) {
+          wx.hideToast();
+          wx.hideLoading();
+        }
+      })
       wx.hideLoading();
       console.log('fetchNewMatch mscheid='
         , res.matchInfo.matchSchedule.id);
@@ -98,6 +108,11 @@ Page({
   },
   reload: function (event) {
     this.loadData();
+  },
+  gotoSummary: function () {
+    wx.navigateTo({
+      url: '/pages/summary/summary'
+    })
   },
 
   formSubmit: function (event) {

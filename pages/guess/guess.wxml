@@ -1,10 +1,10 @@
 
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
+  <view class="userinfo" bindtap="gotoSummary">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" />
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    <text class="reload" bindtap="reload">v0.8.5</text>
+    <text class="reload">v0.8.6</text>
   </view>
   <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
 
@@ -22,10 +22,8 @@
         <!--赛事名称-->
         <view class="match-info">{{match.matchSchedule.matchLevel}} 第{{match.matchSchedule.roundNum}}轮</view>
         <view class="match-info" style="font-size:300%">VS</view>
-
         <!--比赛地点-->
         <view class="match-info">{{match.matchSchedule.stadiumName}}</view>
-
         <!--比赛时间-->
         <view class="match-info">{{matchDateTimeStr}}</view>
       </view>
@@ -120,6 +118,7 @@
       3. 只猜对一方进球数,得1分. 
       4. 每场比赛开赛前30分钟,停止提交竞猜. 
       5. 每场比赛不限次数竞猜,但只以最后一次竞猜为准.
+      * 个人娱乐开发, 无收费无奖品
       </text>
     </view>
   </scroll-view>

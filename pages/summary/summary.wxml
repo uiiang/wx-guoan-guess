@@ -1,0 +1,36 @@
+<view class="container">
+  <view class="wa-grid text-center" style="padding-bottom:30px">
+    <view class="wa-grid-60 border-basic">
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view class="guess-info">积分{{playerResult.totalScore}} 参与竞猜{{playerResult.joinNum}}次</view>
+    </view>
+    <view class="wa-grid-40-r border-basic">
+      <view class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" />
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y="true">
+    <block wx:for="{{guessList}}" wx:for-item="guessitem" wx:for-index="idx" wx:key="{{guessitem.id}}">
+      <view class="match-info guess_item_title text-center">{{guessitem.matchSchedule.matchLevel}} 第{{guessitem.matchSchedule.roundNum}}轮 {{guessitem.matchSchedule.status
+        <2? '未结束': '已结束'}}</view>
+          <view class="wa-grid text-center wa-row">
+            <view class="wa-grid-33 border-basic">
+              <image wx:if="{{guessitem.matchSchedule.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{guessitem.matchSchedule.homeEmblems}}" />
+              <image wx:else class="emblems-image" src="../resources/csl.png" />
+              <view class="team-name">{{guessitem.matchSchedule.homeTeam}}</view>
+            </view>
+            <view class="wa-grid-33 border-basic">
+              <view class="score-info" wx:if="{{guessitem.matchSchedule.status>=2}}">{{guessitem.matchSchedule.homeResult}}:{{guessitem.matchSchedule.awayResult}}</view>
+              <view class="score-info" wx:if="{{guessitem.matchSchedule.status<2}}"> - : -</view>
+              <view class="guess-info">竞猜{{guessitem.homeResult}}:{{guessitem.awayResult}} 得分:{{guessitem.score}}</view>
+            </view>
+            <view class="wa-grid-33 border-basic">
+              <image wx:if="{{guessitem.matchSchedule.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{guessitem.matchSchedule.awayEmblems}}" />
+              <image wx:else class="emblems-image" src="../resources/csl.png" />
+              <view class="team-name">{{guessitem.matchSchedule.awayTeam}}</view>
+            </view>
+          </view>
+    </block>
+  </scroll-view>
+  </view>

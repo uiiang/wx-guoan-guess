@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/guess/guess",
-    "pages/ranking/ranking"
+    "pages/ranking/ranking",
+    "pages/summary/summary"
   ],
   "window":{
     "backgroundTextStyle":"light",

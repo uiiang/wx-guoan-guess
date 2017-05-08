@@ -403,3 +403,13 @@ page .wa-dark {
   width: 50%;
   box-sizing: border-box;
 }
+.wa-grid-60{
+  float: left;
+  width: 70%;
+  box-sizing: border-box;
+}
+.wa-grid-40-r{
+  float: right;
+  width: 30%;
+  box-sizing: border-box;
+}
