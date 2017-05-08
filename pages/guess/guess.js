@@ -15,7 +15,7 @@ Page({
     result_home_lose: {},//竞猜结果预览 输
     result_home_win: {},//竞猜结果预览 赢
     home_goal: 0,//玩家预测的比分
-    away_goal: 0//玩家预测的客队比分
+    away_goal: 0,//玩家预测的客队比分
   },
   onPullDownRefresh: function () {
     this.loadData();
