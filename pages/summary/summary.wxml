@@ -5,7 +5,7 @@
       <view class="guess-info">积分{{playerResult.totalScore}} 参与竞猜{{playerResult.joinNum}}次</view>
     </view>
     <view class="wa-grid-40-r border-basic">
-      <view class="userinfo">
+      <view class="userinfo" bindlongtap="gotoAdmin">
         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" />
       </view>
     </view>

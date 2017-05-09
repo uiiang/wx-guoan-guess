@@ -17,7 +17,7 @@
         <view class="match-info">
           <picker bindchange="bindMLevelChange" mode="selector" range-key="chineseName" range="{{matchLevelList}}">
             <view class="team-name" style="color:red" wx:if="{{matchLevel.length<1}}">设置级别</view>
-            <view class="team-name" wx:else>{{matchLevel.length}}</view>
+            <view class="team-name" wx:else>{{matchLevel}}</view>
           </picker>
           <view class="score-info wa-row">
           第<input class="roundnum-input" name="roundNum" maxlength="2" type="number" 

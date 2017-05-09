@@ -163,9 +163,19 @@ Page({
         })
       }
     }
-
+    if (this.data.homeTeam.length < 1
+      || this.data.awayTeam.length < 1
+      || this.data.matchLevel.length < 1
+      || this.data.stadiumName.length < 1
+      || this.data.matchDateStr.length < 1
+      || this.data.matchTimeStr.length < 1) {
+      wx.showToast({
+        title: '请确认填写完整',
+        duration: 2000
+      })
+    }
     let params = {
-      id: this.data.match.id > 0 ? this.data.match.id:-1,
+      id: this.data.match.id > 0 ? this.data.match.id : -1,
       homeResult: this.home_goal,
       awayResult: this.away_goal,
       homeEmblems: this.data.homeEmblems,

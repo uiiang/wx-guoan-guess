@@ -5,11 +5,12 @@ var util = require('./util.js')
 const HOST = `${config.service.host}`;
 
 // 显示失败提示
-let showModel = (title, content) => {
+let showModel = (t, c) => {
+  console.log('title='+t + ' content = ' + c)
   wx.hideToast();
   wx.showModal({
-    title,
-    content: JSON.stringify(content),
+    title: t,
+    content: JSON.stringify(c),
     showCancel: false
   });
 };
@@ -24,7 +25,7 @@ function fetchNewMatch() {
   ).then(res => {
     console.log('fetchNewMatch', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     let data = res.data[0];
@@ -130,7 +131,7 @@ function countMatchResult(mschid) {
   ).then(res => {
     console.log('fetchPlayResult', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     let data = res.data[0];
@@ -152,7 +153,7 @@ function startNewMatch() {
   ).then(res => {
     console.log('startNewMatch', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     let data = res.data[0];
@@ -174,7 +175,7 @@ function fetchMatchSchedule() {
   ).then(res => {
     console.log('fetchMatchSchedule', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     return res.data;
@@ -189,7 +190,7 @@ function fetchMatchScheduleInfo(mscheid) {
   ).then(res => {
     console.log('fetchMatchScheduleInfo', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     let data = res.data;
@@ -197,7 +198,7 @@ function fetchMatchScheduleInfo(mscheid) {
     let matchInfo = {};
     let matchDateTimeStr = {};
     ret.matchInfo = data;
-    ret.matchDateStr = util.formatDate(new Date(data.matchDateTime),'-');
+    ret.matchDateStr = util.formatDate(new Date(data.matchDateTime), '-');
     ret.matchTimeStr = util.formatTime(new Date(data.matchDateTime));
     return ret;
   })
@@ -211,7 +212,7 @@ function fetchTeamList() {
   ).then(res => {
     console.log('fetchTeamList', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     return res.data;
@@ -226,7 +227,7 @@ function fetchStadiumList() {
   ).then(res => {
     console.log('fetchStadiumList', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     return res.data;
@@ -241,7 +242,7 @@ function fetchMatchLevelList() {
   ).then(res => {
     console.log('fetchMatchLevelList', res);
     if (res.code !== 0) {
-      showModel('服务器好像出问题了', res.msg);
+      showModel('服务器好像出问题了', res);
       return;
     }
     return res.data;
@@ -268,7 +269,7 @@ module.exports = {
   fetchPlayResult: fetchPlayResult,
   countMatchResult: countMatchResult,
   startNewMatch: startNewMatch,
-  fetchMatchSchedule:fetchMatchSchedule,
+  fetchMatchSchedule: fetchMatchSchedule,
   fetchStadiumList: fetchStadiumList,
   fetchTeamList: fetchTeamList,
   fetchMatchScheduleInfo: fetchMatchScheduleInfo,

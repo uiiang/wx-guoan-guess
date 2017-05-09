@@ -33,5 +33,11 @@ Page({
                     playerResult: res
                 })
             })
-    }
+    },
+
+    gotoAdmin: function () {
+      wx.navigateTo({
+        url: '/pages/admin/admin'
+      })
+    },
 })

@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/schedule/schedule",
-    "pages/admin/admin",
     "pages/guess/guess",
     "pages/ranking/ranking",
     "pages/summary/summary",
-    "pages/schedule/edit/edit"
+    "pages/schedule/edit/edit",
+    "pages/schedule/schedule",
+    "pages/admin/admin"
   ],
   "window": {
     "backgroundTextStyle": "light",

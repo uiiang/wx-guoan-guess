@@ -4,7 +4,7 @@
 */
 /*general*/
 .border-basic{
-  border: 1px solid red
+  border: 0px solid red
 }
 page{
   height: 100%;
