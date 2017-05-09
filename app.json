@@ -1,14 +1,17 @@
 {
-  "pages":[
+  "pages": [
+    "pages/schedule/schedule",
+    "pages/admin/admin",
     "pages/guess/guess",
     "pages/ranking/ranking",
-    "pages/summary/summary"
+    "pages/summary/summary",
+    "pages/schedule/edit/edit"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "国安比赛竞猜",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "networkTimeout": {
     "request": 20000,
@@ -16,22 +19,25 @@
     "uploadFile": 20000,
     "downloadFile": 20000
   },
-  "tabBar": {  
+  "tabBar": {
     "color": "white",
     "selectedColor": "#BF8600",
     "borderStyle": "white",
     "backgroundColor": "black",
     "position": "bottom",
-    "list": [{
-      "iconPath": "pages/resources/home.png",
-      "pagePath": "pages/guess/guess",  
-      "selectedIconPath": "pages/resources/home.png",
-      "text": "猜比分"  
-    }, {  
-      "iconPath": "pages/resources/rank.png",
-      "pagePath": "pages/ranking/ranking",  
-      "selectedIconPath": "pages/resources/rank.png",
-      "text": "排行榜"  
-    }]  
+    "list": [
+      {
+        "iconPath": "pages/resources/home.png",
+        "pagePath": "pages/guess/guess",
+        "selectedIconPath": "pages/resources/home.png",
+        "text": "猜比分"
+      },
+      {
+        "iconPath": "pages/resources/rank.png",
+        "pagePath": "pages/ranking/ranking",
+        "selectedIconPath": "pages/resources/rank.png",
+        "text": "排行榜"
+      }
+    ]
   }
 }

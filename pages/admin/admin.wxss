@@ -1,0 +1,32 @@
+
+.emblems-image {
+  width: 200rpx;
+  height: 200rpx;
+  align-items: center;
+  position:relative;
+}
+
+.emblems-grid{
+  flex-direction:column
+}
+.team-name{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  color:white;
+}
+
+.match-info{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  color:white;
+  font-size: 80%;
+}
+.btn_view{
+ background-color: forestgreen;
+}
+.btn_text{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  color:white;
+  font-size: 150%;
+}

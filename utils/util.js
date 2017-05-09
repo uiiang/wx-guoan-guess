@@ -1,16 +1,15 @@
 function formatTime(date) {
   var hour = date.getHours()
   var minute = date.getMinutes()
-  var second = date.getSeconds()
-  return [hour, minute, second].map(formatNumber).join(':')
+  return [hour, minute].map(formatNumber).join(':')
 }
 
-function formatDate(date){
+function formatDate(date, separator){
     var year = date.getFullYear()
   var month = date.getMonth() + 1
   var day = date.getDate()
 
-  return [year, month, day].map(formatNumber).join('/')
+  return year + separator + month + separator + day
 }
 
 function formatDateTime(date){
@@ -33,10 +32,19 @@ function isNotANumber(inputData) {
   　　var re = /^[0-9]+[0-9]*]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/
   return !re.test(inputData);
 }
-
+function showModal(c,t,fun) {
+    if(!t)
+        t='提示'
+    wx.showModal({
+        title: t,
+        content: c,
+        success: fun
+    })
+}
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
   formatDateTime:formatDateTime,
-  isNotANumber:isNotANumber
+  isNotANumber:isNotANumber,
+  showModal:showModal
 }

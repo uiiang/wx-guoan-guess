@@ -1,0 +1,36 @@
+<view class="container">
+
+  <!--双方队徽队名比赛时间地点-->
+  <scroll-view scroll-y="true">
+    <button class="zan-btn zan-btn--large zan-btn--primary" bindtap="createNewMatch">创建新比赛
+    </button>
+    <block wx:for="{{scheduleList}}" wx:for-item="scheduleItem" wx:for-index="idx" wx:key="{{scheduleItem.id}}">
+      <view bindtap="toEdit" data-mscheid="{{scheduleItem.id}}">
+        <view class="match-info guess_item_title text-center">{{scheduleItem.matchLevel}} 第{{scheduleItem.roundNum}}轮</view>
+        <view class="wa-grid text-center wa-row">
+          <view class="wa-grid-33 border-basic">
+            <image wx:if="{{scheduleItem.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{scheduleItem.homeEmblems}}" />
+            <image wx:else class="emblems-image" src="../resources/csl.png" />
+            <view class="team-name">{{scheduleItem.homeTeam}}</view>
+          </view>
+          <view class="wa-grid-33 border-basic">
+            <view class="score-info" wx:if="{{scheduleItem.status>=2}}">
+              {{scheduleItem.homeResult}}:{{scheduleItem.awayResult}}</view>
+            <view class="score-info" wx:if="{{scheduleItem.status<2}}"> - : -</view>
+            <view class="guess-info" wx:if="{{scheduleItem.status==0}}">未开始</view>
+            <view class="guess-info" wx:if="{{scheduleItem.status==1}}">进行中</view>
+            <view class="guess-info" wx:if="{{scheduleItem.status==2}}">已结束</view>
+            <view class="guess-info" wx:if="{{scheduleItem.status==3}}">已计算</view>
+          </view>
+          <view class="wa-grid-33 border-basic">
+            <image wx:if="{{scheduleItem.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{scheduleItem.awayEmblems}}" />
+            <image wx:else class="emblems-image" src="../resources/csl.png" />
+            <view class="team-name">{{scheduleItem.awayTeam}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <button class="zan-btn zan-btn--large zan-btn--primary" bindtap="createNewMatch">创建新比赛
+    </button>
+  </scroll-view>
+</view>

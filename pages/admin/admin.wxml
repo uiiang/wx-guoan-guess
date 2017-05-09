@@ -1,0 +1,72 @@
+<view class="container">
+    <!--比赛信息显示区-->
+
+    <!--双方队徽队名比赛时间地点-->
+    <view class="wa-grid text-center emblems-grid">
+      <view class="wa-grid-33 border-basic">
+        <image wx:if="{{match.matchSchedule.homeEmblems.length>4}}" 
+          class="emblems-image" src="../resources/{{match.matchSchedule.homeEmblems}}" />
+        <image wx:else class="emblems-image" src="../resources/csl.png" />
+        <view class="team-name">{{match.matchSchedule.homeTeam}}</view>
+      </view>
+      <view class="wa-grid-33 border-basic">
+        <!--赛事名称-->
+        <view class="match-info">{{match.matchSchedule.matchLevel}} 第{{match.matchSchedule.roundNum}}轮</view>
+        <view class="match-info" style="font-size:300%">VS</view>
+        <!--比赛地点-->
+        <view class="match-info">{{match.matchSchedule.stadiumName}}</view>
+        <!--比赛时间-->
+        <view class="match-info">{{matchDateTimeStr}}</view>
+      </view>
+
+      <!--客队信息-->
+      <view class="wa-grid-33 border-basic emblems-grid">data
+        <image wx:if="{{match.matchSchedule.awayEmblems.length>4}}" 
+          class="emblems-image" src="../resources/{{match.matchSchedule.awayEmblems}}" />
+        <image wx:else class="emblems-image" src="../resources/csl.png" />
+        <view class="team-name">{{match.matchSchedule.awayTeam}}</view>
+      </view>
+    </view>
+  <view class="wa-grid text-center wa-row">
+    <view class="wa-grid-33 border-basic">
+        <view class="match-info">猜主队赢{{match.homeWinNum}}</view>
+    </view>
+    <view class="wa-grid-33 border-basic">
+        <view class="match-info">猜平{{match.drawNum}}</view>
+    </view>
+    <view class="wa-grid-33 border-basic">
+        <view class="match-info">猜客队赢{{match.awayWinNum}}</view>
+    </view>
+  </view>
+  <view class="wa-grid text-center wa-row">
+    <view class="wa-grid-50 border-basic btn_view" bindtap="countMatchResult" data-matchid="{{match.id}}">
+          <view class="btn_text">计算竞猜预览</view>
+    </view>
+    <view class="wa-grid-50 border-basic btn_view" bindtap="sendStartMatch">
+          <view class="btn_text">开始新比赛</view>
+    </view>
+  </view>
+  <view class="wa-grid text-center wa-row">
+    <view class="wa-grid-50 border-basic">
+          <view class="btn_text">竞猜管理</view>
+    </view>
+    <view class="wa-grid-50 border-basic" bindtap="gotoSchedule">
+          <view class="btn_text">赛程管理</view>
+    </view>
+  </view>
+  <view class="wa-grid text-center wa-row">
+    <view class="wa-grid-50 border-basic">
+          <view class="btn_text">球队管理</view>
+    </view>
+    <view class="wa-grid-50 border-basic">
+          <view class="btn_text">球场管理</view>
+    </view>
+  </view>
+  <view class="wa-grid text-center wa-row">
+    <view class="wa-grid-50 border-basic">
+          <view class="btn_text">赛事管理</view>
+    </view>
+    <view class="wa-grid-50 border-basic">
+    </view>
+  </view>
+</view>
