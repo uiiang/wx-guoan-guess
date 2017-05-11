@@ -1,0 +1,42 @@
+<!--matchlevel.wxml-->
+<view class="container">
+  <scroll-view scroll-y="true">
+    <button class="zan-btn zan-btn--large zan-btn--primary" bindtap="createNewMatchLevel">创建新赛事
+    </button>
+    <block wx:for="{{matchLevelList}}" wx:for-item="mLItem" wx:for-index="idx" wx:key="{{matchLevelList.id}}">
+      <view class="ranking_view">
+        <view class="match-title text-center">{{mLItem.chineseName}}
+        </view>
+        <view class="match-title text-center" 
+          wx:if="{{mLItem.status==0}}">未开始</view>
+        <view class="match-title text-center" 
+          wx:if="{{mLItem.status==1}}">进行中</view>
+        <view class="match-title text-center" 
+          wx:if="{{mLItem.status==2}}">已结束</view>
+        <view class="wa-grid text-center">
+          <view class="match-info text-center">创建时间:{{mLItem.createDateStr}}</view>
+          <view class="match-info text-center">开始时间:{{mLItem.startDateStr}}</view>
+          <view class="match-info text-center">结束时间:{{mLItem.finishDateStr}}</view>
+        </view>
+        <view class="wa-grid text-center" wx:if="{{mLItem.status<2}}">
+          <button type="primary"
+          style="margin-bottom: 20rpx;"
+            disable="{{mLItem.status==1}}"
+            data-matchid="{{mLItem.id}}"
+            bindtap="countMatchLevel">计算竞猜数据
+          </button>
+          <button type="primary"
+            wx:if="{{mLItem.status==0}}"
+            data-matchid="{{mLItem.id}}"
+            bindtap="startMatchLevel">开始赛事
+          </button>
+          <button type="warn"
+            wx:if="{{mLItem.status==1}}"
+            data-matchid="{{mLItem.id}}"
+            bindtap="finshMatchLevel">结束赛事
+          </button>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

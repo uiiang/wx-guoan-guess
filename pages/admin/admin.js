@@ -11,15 +11,7 @@ Page({
             title: '加载中',
             icon: 'loading',
             mask: true,
-            // fail: setTimeout
         })
-        // setTimeout(function () {
-        //   wx.hideLoading()
-        //   wx.showToast({
-        //     title: "服务器超时",
-        //     duration: 3000
-        //   });
-        // }, 1000)
         this.loadData();
     },
 
@@ -48,6 +40,7 @@ Page({
             title: "启动一场新的比赛",
             content: "1.在赛程列表中结束当前比赛.2. 在赛事管理中计算竞猜结果. 完成以上步骤后才可以开始新比赛",
             success: function (click) {
+              console.log('confirmStartNewMatch',this)
                 if (click.confirm) {
                     console.log('用户点击确定')
                     wx.showLoading({
@@ -85,8 +78,8 @@ Page({
                 matchDateTimeStr: res.matchDateTimeStr,
                 overdue: res.overdue,
                 userInfo: app.globalData.userInfo
-            })
-            wx.hideLoading();
+            },
+              wx.hideLoading())
         })
     },
 
@@ -104,13 +97,18 @@ Page({
                 matchDateTimeStr: res.matchDateTimeStr,
                 overdue: res.overdue,
                 userInfo: app.globalData.userInfo
-            })
-            wx.hideLoading();
+            },
+              wx.hideLoading())
         })
     },
     gotoSchedule: function () {
         wx.navigateTo({
             url: '/pages/schedule/schedule'
         })
+    },
+    gotoMatchLevel: function () {
+      wx.navigateTo({
+        url: '/pages/matchlevel/matchlevel'
+      })
     },
 })

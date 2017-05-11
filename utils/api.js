@@ -19,7 +19,7 @@ let showModel = (t, c) => {
 function fetchNewMatch() {
   console.log(HOST);
   return API.GET(
-    `${HOST}/nowmatch`,
+    `${HOST}/API/nowmatch`,
     {},
     { cache: false, login: true },
   ).then(res => {
@@ -259,6 +259,67 @@ function submitMatchSchedule(params) {
       return data
     })
 }
+
+function countMatchLevel(matchid){
+  return API.GET(
+    `${HOST}/API/countresult?mainfoid=`+matchid,
+    {},
+    { cache: false, login: true }
+  ).then(res => {
+    console.log('countMatchLevel', res);
+    if (res.code !== 0) {
+      showModel('服务器好像出问题了', res);
+      return;
+    }
+    return res;
+  })
+}
+
+function startMatchLevel(matchid) {
+  return API.GET(
+    `${HOST}/API/startmatch?id=` + matchid,
+    {},
+    { cache: false, login: true }
+  ).then(res => {
+    console.log('startMatchLevel', res);
+    if (res.code !== 0) {
+      showModel('服务器好像出问题了', res);
+      return;
+    }
+    return res;
+  })
+}
+
+function finshMatchLevel(matchid) {
+  return API.GET(
+    `${HOST}/API/finishmatch?id=` + matchid,
+    {},
+    { cache: false, login: true }
+  ).then(res => {
+    console.log('finshMatchLevel', res);
+    if (res.code !== 0) {
+      showModel('服务器好像出问题了', res);
+      return;
+    }
+    return res;
+  })
+}
+
+function deleteMatchSchedule(mscheid) {
+  return API.GET(
+    `${HOST}/API/deletesche?id=` + mscheid,
+    {},
+    { cache: false, login: true }
+  ).then(res => {
+    console.log('deleteMatchSchedule', res);
+    if (res.code !== 0) {
+      showModel('服务器好像出问题了', res);
+      return;
+    }
+    return res;
+  })
+}
+
 module.exports = {
   fetchNewMatch: fetchNewMatch,
   submitGuessScore: submitGuessScore,
@@ -274,5 +335,9 @@ module.exports = {
   fetchTeamList: fetchTeamList,
   fetchMatchScheduleInfo: fetchMatchScheduleInfo,
   fetchMatchLevelList: fetchMatchLevelList,
-  submitMatchSchedule: submitMatchSchedule
+  submitMatchSchedule: submitMatchSchedule,
+  countMatchLevel: countMatchLevel,
+  startMatchLevel: startMatchLevel,
+  finshMatchLevel: finshMatchLevel,
+  deleteMatchSchedule: deleteMatchSchedule
 }

@@ -1,6 +1,6 @@
 // edit.js
 var util = require('../../../utils/util.js')
-import { fetchMatchScheduleInfo, fetchStadiumList, fetchTeamList, fetchMatchLevelList, submitMatchSchedule } from '../../../utils/api';
+import { fetchMatchScheduleInfo, fetchStadiumList, fetchTeamList, fetchMatchLevelList, submitMatchSchedule, deleteMatchSchedule } from '../../../utils/api';
 var app = getApp()
 Page({
   data: {
@@ -109,6 +109,16 @@ Page({
     console.log('bindStadiumChange', e.detail.value + ' ' + this.data.stadiumList[e.detail.value])
     this.setData({
       stadiumName: this.data.stadiumList[e.detail.value].chineseName
+    })
+  },
+
+  deleteMatchSchedule: function (event) {
+    var mscheid = event.currentTarget.dataset.mscheid;
+    deleteMatchSchedule(mscheid).then(res => {
+        wx.showToast({
+          title: '删除成功',
+          duration: 2000
+      })
     })
   },
 

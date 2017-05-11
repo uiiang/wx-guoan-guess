@@ -4,6 +4,7 @@ import config from './config';
 
 App({
   onLaunch() {
+    console.log('app version', config.service.version)
     qcloud.setLoginUrl(config.service.loginUrl);
     wx.getSystemInfo({
       success: res => {
@@ -46,5 +47,6 @@ App({
   },
   globalData: {
     userInfo: {},
+    app_version: config.service.version
   }
 })

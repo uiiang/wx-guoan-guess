@@ -16,6 +16,7 @@ Page({
     result_home_win: {},//竞猜结果预览 赢
     home_goal: 0,//玩家预测的比分
     away_goal: 0,//玩家预测的客队比分
+    app_version: app.globalData.app_version
   },
   onPullDownRefresh: function () {
     this.loadData();
@@ -27,13 +28,6 @@ Page({
       mask: true,
       // fail: setTimeout
     })
-    // setTimeout(function () {
-    //   wx.hideLoading()
-    //   wx.showToast({
-    //     title: "服务器超时",
-    //     duration: 3000
-    //   });
-    // }, 1000)
     this.loadData();
   },
 

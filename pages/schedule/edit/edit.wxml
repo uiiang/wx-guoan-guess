@@ -5,7 +5,8 @@
     <form bindsubmit="formSubmit">
   <view class="wa-grid text-center emblems-grid">
       <view class="wa-grid-33 border-basic">
-        <picker bindchange="bindHomeTeamChange" mode="selector" range-key="chineseName" range="{{teamList}}">
+        <picker bindchange="bindHomeTeamChange" mode="selector" range-key="chineseName" range="{{teamList}}"
+         disabled="{{match.status}}">
         <image wx:if="{{homeEmblems.length>4}}" class="emblems-image" src="../../resources/{{homeEmblems}}" />
         <image wx:else class="emblems-image" src="../../resources/csl.png" />
           <view class="team-name" style="color:red" wx:if="{{homeTeam.length<1}}">选择主队</view>
@@ -15,43 +16,49 @@
       <view class="wa-grid-33 border-basic">
         <!--赛事名称-->
         <view class="match-info">
-          <picker bindchange="bindMLevelChange" mode="selector" range-key="chineseName" range="{{matchLevelList}}">
+          <picker bindchange="bindMLevelChange" mode="selector" range-key="chineseName" range="{{matchLevelList}}"
+           disabled="{{match.status}}">
             <view class="team-name" style="color:red" wx:if="{{matchLevel.length<1}}">设置级别</view>
             <view class="team-name" wx:else>{{matchLevel}}</view>
           </picker>
           <view class="score-info wa-row">
-          第<input class="roundnum-input" name="roundNum" maxlength="2" type="number" 
+          第<input class="roundnum-input" name="roundNum" maxlength="2" type="number"  disabled="{{match.status}}"
             placeholder="{{roundNum}}" placeholder-style="color:black;" value="{{roundNum}}"/>轮
           </view>
         </view>
         <view class="score-info wa-row">
-          <input class="score-input" name="home" maxlength="2" type="number" 
+          <input class="score-input" name="home" maxlength="2" type="number"  disabled="{{match.status}}"
             placeholder="{{match.homeResult}}" placeholder-style="color:black;" value="{{match.homeResult}}"/>:
-          <input class="score-input" name="away" maxlength="2" type="number" 
+          <input class="score-input" name="away" maxlength="2" type="number"  disabled="{{match.status}}"
             placeholder="{{match.awayResult}}" placeholder-style="color:black;" value="{{match.awayResult}}"/>
         </view>
-        <picker bindchange="bindStatusChange" mode="selector" value="{{statusindex}}" range="{{statusarray}}">
+        <picker bindchange="bindStatusChange" mode="selector" value="{{statusindex}}" range="{{statusarray}}"
+         disabled="{{match.status}}">
               <view class="team-name" style="color:red" wx:if="{{statusarray[statusindex].length<1}}">设置状态</view>
               <view class="team-name" wx:else>{{statusarray[statusindex]}}</view>
         </picker>
         <!--比赛地点-->
-        <picker bindchange="bindStadiumChange" mode="selector" range-key="chineseName" range="{{stadiumList}}">
+        <picker bindchange="bindStadiumChange" mode="selector" range-key="chineseName" range="{{stadiumList}}"
+         disabled="{{match.status}}">
           <view class="match-info" style="color:red" wx:if="{{stadiumName.length<1}}">设置主场</view>
           <view class="match-info" wx:else>{{stadiumName}}</view>
         </picker>
         <!--比赛时间-->
-        <picker mode="date" value="{{matchDateStr}}" start="2017-03-01" end="2017-12-31" bindchange="bindDateChange">
+        <picker mode="date" value="{{matchDateStr}}" start="2017-03-01" end="2017-12-31" bindchange="bindDateChange"
+         disabled="{{match.status}}">
           <view class="team-name" style="color:red" wx:if="{{matchDateStr.length<1}}">比赛日期</view>
           <view class="team-name" wx:else>{{matchDateStr}}</view>
         </picker>
-        <picker mode="time" value="{{matchTimeStr}}" start="14:00" end="21:00" bindchange="bindTimeChange">
+        <picker mode="time" value="{{matchTimeStr}}" start="14:00" end="21:00" bindchange="bindTimeChange"
+         disabled="{{match.status}}">
           <view class="team-name" style="color:red" wx:if="{{matchTimeStr.length<1}}">比赛时间</view>
           <view class="team-name" wx:else>{{matchTimeStr}}</view>
         </picker>
       </view>
       <!--客队信息-->
       <view class="wa-grid-33 border-basic emblems-grid">
-        <picker bindchange="bindAwayTeamChange" mode="selector" range-key="chineseName" range="{{teamList}}">
+        <picker bindchange="bindAwayTeamChange" mode="selector" range-key="chineseName" range="{{teamList}}"
+         disabled="{{match.status}}">
         <image wx:if="{{awayEmblems.length>4}}" class="emblems-image" src="../../resources/{{awayEmblems}}" />
         <image wx:else class="emblems-image" src="../../resources/csl.png" />
           <view class="team-name" style="color:red" wx:if="{{awayTeam.length<1}}">选择客队</view>
@@ -59,9 +66,13 @@
         </picker>
       </view>
   </view>
-        <button 
-          class="zan-btn zan-btn--large zan-btn--primary" 
+        <button disabled="{{match.status}}" type="primary"
+          style="margin-bottom: 20rpx;"
           formType="submit">确认
+        </button>
+        <button type="warn" wx:if="{{match.id>0}}" 
+          data-mscheid="{{match.id}}"
+          bindtap="deleteMatchSchedule">删除
         </button>
     </form>
 </view>

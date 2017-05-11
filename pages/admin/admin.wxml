@@ -20,7 +20,7 @@
       </view>
 
       <!--客队信息-->
-      <view class="wa-grid-33 border-basic emblems-grid">data
+      <view class="wa-grid-33 border-basic emblems-grid">
         <image wx:if="{{match.matchSchedule.awayEmblems.length>4}}" 
           class="emblems-image" src="../resources/{{match.matchSchedule.awayEmblems}}" />
         <image wx:else class="emblems-image" src="../resources/csl.png" />
@@ -63,7 +63,7 @@
     </view>
   </view>
   <view class="wa-grid text-center wa-row">
-    <view class="wa-grid-50 border-basic">
+    <view class="wa-grid-50 border-basic" bindtap="gotoMatchLevel">
           <view class="btn_text">赛事管理</view>
     </view>
     <view class="wa-grid-50 border-basic">

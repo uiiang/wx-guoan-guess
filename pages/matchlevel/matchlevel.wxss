@@ -1,0 +1,27 @@
+/* matchlevel.wxss */
+
+.guess_item_title{
+  font-size:120%;
+  color: white;
+  text-align: center;
+  align-items: center;
+}
+.match-title{
+  padding-bottom: 10rpx;
+  color:black;
+  font-size: 150%;
+}
+.match-info{
+  padding-bottom: 10rpx;
+  color:black;
+  font-size: 100%;
+}
+.ranking_view{
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: lightgray;
+  padding: 10px 10px 10px 10px;
+}

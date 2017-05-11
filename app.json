@@ -5,7 +5,8 @@
     "pages/summary/summary",
     "pages/schedule/edit/edit",
     "pages/schedule/schedule",
-    "pages/admin/admin"
+    "pages/admin/admin",
+    "pages/matchlevel/matchlevel"
   ],
   "window": {
     "backgroundTextStyle": "light",
