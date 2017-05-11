@@ -123,13 +123,24 @@ function fetchPlayResult() {
   })
 }
 
+function fetchPlayInfo() {
+  return API.GET(
+    `${HOST}/API/checkrole`,
+    {},
+    { cache: false, login: true }
+  ).then(res => {
+    console.log('fetchPlayInfo', res);
+    return res;
+  })
+}
+
 function countMatchResult(mschid) {
   return API.GET(
     `${HOST}/API/countMatchResult?id=` + mschid,
     {},
     { cache: false, login: true }
   ).then(res => {
-    console.log('fetchPlayResult', res);
+    console.log('countMatchResult', res);
     if (res.code !== 0) {
       showModel('服务器好像出问题了', res);
       return;
@@ -339,5 +350,6 @@ module.exports = {
   countMatchLevel: countMatchLevel,
   startMatchLevel: startMatchLevel,
   finshMatchLevel: finshMatchLevel,
-  deleteMatchSchedule: deleteMatchSchedule
+  deleteMatchSchedule: deleteMatchSchedule,
+  fetchPlayInfo: fetchPlayInfo
 }

@@ -1,12 +1,13 @@
 
 var util = require('../../utils/util.js')
-import { fetchGuessHistory, fetchPlayResult } from '../../utils/api';
+import { fetchGuessHistory, fetchPlayResult, fetchPlayInfo } from '../../utils/api';
 var app = getApp()
 Page({
   data: {
     userInfo: {},//用户信息
     guessList: {},//竞猜历史记录
-    playerResult: {}//玩家积分情况
+    playerResult: {},//玩家积分情况
+    isAdmin: false
   },
 
   onLoad() {
@@ -31,8 +32,13 @@ Page({
   },
 
   gotoAdmin: function () {
-    wx.navigateTo({
-      url: '/pages/admin/admin'
+    fetchPlayInfo().then(res => {
+      console.log('fetchPlayInfo', res);
+      if (res.code == 0) {
+        wx.navigateTo({
+          url: '/pages/admin/admin'
+        })
+      }
     })
   },
 })
