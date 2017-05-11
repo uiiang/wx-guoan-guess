@@ -5,11 +5,11 @@
 * 比赛结束后计算玩家积分排行
 
 
-!(https://github.com/uiiang/wx-guoan-guess/blob/master/images/home.png "首页截图")
+![首页截图](https://github.com/uiiang/wx-guoan-guess/blob/master/images/home.png = 200x100 "首页截图")
 
-!(https://github.com/uiiang/wx-guoan-guess/blob/master/images/ranking.png "排行榜")
+![排行榜](https://github.com/uiiang/wx-guoan-guess/blob/master/images/ranking.png "排行榜")
 
-!(https://github.com/uiiang/wx-guoan-guess/blob/master/images/my.png "竞猜历史记录")
+![竞猜历史记录](https://github.com/uiiang/wx-guoan-guess/blob/master/images/my.png "竞猜历史记录")
 
 ![赛事管理](https://github.com/uiiang/wx-guoan-guess/blob/master/images/matchelevel.png "赛事管理")
 
