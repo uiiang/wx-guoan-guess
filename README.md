@@ -5,15 +5,15 @@
 * 比赛结束后计算玩家积分排行
 
 
-![首页截图](https://github.com/uiiang/wx-guoan-guess/blob/master/images/home.png =200x100 "首页截图")
+!<img src="https://github.com/uiiang/wx-guoan-guess/blob/master/images/home.png" width="50%" />
 
-![排行榜](https://github.com/uiiang/wx-guoan-guess/blob/master/images/ranking.png =200x100 "排行榜")
+!<img src="https://github.com/uiiang/wx-guoan-guess/blob/master/images/ranking.png" width="50%" />
 
-![竞猜历史记录](https://github.com/uiiang/wx-guoan-guess/blob/master/images/my.png =200x100 "竞猜历史记录")
+!<img src="https://github.com/uiiang/wx-guoan-guess/blob/master/images/my.png" width="50%" />
 
-![赛事管理](https://github.com/uiiang/wx-guoan-guess/blob/master/images/matchelevel.png =200x100 "赛事管理")
+!<img src="https://github.com/uiiang/wx-guoan-guess/blob/master/images/matchelevel.png" width="50%" />
 
-![赛程管理](https://github.com/uiiang/wx-guoan-guess/blob/master/images/matchschedules.png =200x100 "赛程管理")
+!<img src="https://github.com/uiiang/wx-guoan-guess/blob/master/images/matchschedules.png" width="50%" />
 
 
 todo:
