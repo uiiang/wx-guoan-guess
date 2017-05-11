@@ -1,7 +1,7 @@
 <!--matchlevel.wxml-->
 <view class="container">
   <scroll-view scroll-y="true">
-    <button class="zan-btn zan-btn--large zan-btn--primary" bindtap="createNewMatchLevel">创建新赛事
+    <button type="primary" bindtap="createNewMatchLevel">创建新赛事
     </button>
     <block wx:for="{{matchLevelList}}" wx:for-item="mLItem" wx:for-index="idx" wx:key="{{matchLevelList.id}}">
       <view class="ranking_view">

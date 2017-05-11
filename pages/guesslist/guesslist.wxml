@@ -1,0 +1,41 @@
+<!--guesslist.wxml-->
+<view class="container">
+
+  <view class="guess_item_title text-center">{{scheduleItem.matchLevel}} 第{{scheduleItem.roundNum}}轮</view>
+  <view class="wa-grid text-center wa-row">
+    <view class="wa-grid-33 border-basic">
+      <image wx:if="{{scheduleItem.homeEmblems.length>4}}" class="emblems-image" src="../resources/{{scheduleItem.homeEmblems}}" />
+      <image wx:else class="emblems-image" src="../resources/csl.png" />
+      <view class="team-name">{{scheduleItem.homeTeam}}</view>
+    </view>
+    <view class="wa-grid-33 border-basic">
+      <view class="score-info" wx:if="{{scheduleItem.status>=2}}">
+        {{scheduleItem.homeResult}}:{{scheduleItem.awayResult}}</view>
+      <view class="score-info" wx:if="{{scheduleItem.status<2}}"> - : -</view>
+      <view class="guess-info" wx:if="{{scheduleItem.status==0}}">未开始</view>
+      <view class="guess-info" wx:if="{{scheduleItem.status==1}}">进行中</view>
+      <view class="guess-info" wx:if="{{scheduleItem.status==2}}">已结束</view>
+      <view class="guess-info" wx:if="{{scheduleItem.status==3}}">已计算</view>
+    </view>
+    <view class="wa-grid-33 border-basic">
+      <image wx:if="{{scheduleItem.awayEmblems.length>4}}" class="emblems-image" src="../resources/{{scheduleItem.awayEmblems}}" />
+      <image wx:else class="emblems-image" src="../resources/csl.png" />
+      <view class="team-name">{{scheduleItem.awayTeam}}</view>
+    </view>
+  </view>
+
+
+  <block wx:for="{{guessResultList}}" wx:for-item="guessItem" wx:for-index="idx" wx:key="{{guessItem.id}}">
+    <view class="guess_item_title text-center">{{guessItem.submitTimeStr}}</view>
+    <view class="wa-grid text-center wa-row">
+      <view class="wa-grid-33 border-basic userinfo">
+        <image class="userinfo-avatar" src="{{guessItem.playerInfo.avatarUrl}}" />
+        <text class="userinfo-nickname">{{guessItem.playerInfo.nickName}}</text>
+      </view>
+      <view class="wa-grid-33 border-basic">
+        <view class="guess-info">竞猜{{guessItem.homeResult}}:{{guessItem.awayResult}}</view>
+        <view class="guess-info">得分:{{guessItem.score}}</view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -115,10 +115,18 @@ Page({
   deleteMatchSchedule: function (event) {
     var mscheid = event.currentTarget.dataset.mscheid;
     deleteMatchSchedule(mscheid).then(res => {
-        wx.showToast({
-          title: '删除成功',
-          duration: 2000
+      wx.showToast({
+        title: '删除成功',
+        duration: 2000
       })
+    })
+  },
+
+  gotoGuessPrev: function (event) {
+    var match = event.currentTarget.dataset.match;
+    console.log('gotoGuessPrev', match.id)
+    wx.navigateTo({
+      url: '/pages/guesslist/guesslist?match=' + match.id
     })
   },
 

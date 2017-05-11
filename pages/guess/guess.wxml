@@ -66,7 +66,7 @@
       </view>
       <view>
         <button disabled="{{overdue}}" 
-          class="zan-btn zan-btn--large zan-btn--primary" 
+          type="primary"
           formType="submit">
           {{!overdue?'确认':'来晚了,下回请早儿'}}
         </button>

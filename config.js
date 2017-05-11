@@ -4,6 +4,7 @@
 const version='v0.9.0';
 // 此处主机域名修改成腾讯云解决方案分配的域名/
 const host = 'http://localhost:8080';
+// const host = 'https://36715210.qcloud.la/guoan1992';
 
 /**
  * 把以下字段替换成自己的cos相关信息，详情可看API文档 https://www.qcloud.com/document/product/436/6066

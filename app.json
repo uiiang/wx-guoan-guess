@@ -4,9 +4,10 @@
     "pages/ranking/ranking",
     "pages/summary/summary",
     "pages/schedule/edit/edit",
-    "pages/schedule/schedule",
     "pages/admin/admin",
-    "pages/matchlevel/matchlevel"
+    "pages/matchlevel/matchlevel",
+    "pages/schedule/schedule",
+    "pages/guesslist/guesslist"
   ],
   "window": {
     "backgroundTextStyle": "light",

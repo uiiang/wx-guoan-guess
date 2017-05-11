@@ -1,6 +1,5 @@
 /**app.wxss**/
 @import 'wa-ui.wxss';
-@import 'bower_components/zanui-weapp/dist/index.wxss';
 .container {
   height: 100%;
   align-items: flex-start;

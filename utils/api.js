@@ -331,6 +331,21 @@ function deleteMatchSchedule(mscheid) {
   })
 }
 
+function fetchGuessResultList(mscheid) {
+  return API.GET(
+    `${HOST}/API/getguessreslist?id=` + mscheid,
+    {},
+    { cache: false, login: true }
+  ).then(res => {
+    console.log('fetchGuessResultList', res);
+    if (res.code !== 0) {
+      showModel('服务器好像出问题了', res);
+      return;
+    }
+    return res.data;
+  })
+}
+
 module.exports = {
   fetchNewMatch: fetchNewMatch,
   submitGuessScore: submitGuessScore,
@@ -351,5 +366,6 @@ module.exports = {
   startMatchLevel: startMatchLevel,
   finshMatchLevel: finshMatchLevel,
   deleteMatchSchedule: deleteMatchSchedule,
-  fetchPlayInfo: fetchPlayInfo
+  fetchPlayInfo: fetchPlayInfo,
+  fetchGuessResultList: fetchGuessResultList
 }

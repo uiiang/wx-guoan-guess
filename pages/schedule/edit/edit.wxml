@@ -72,7 +72,11 @@
         </button>
         <button type="warn" wx:if="{{match.id>0}}" 
           data-mscheid="{{match.id}}"
+          style="margin-bottom: 20rpx;"
           bindtap="deleteMatchSchedule">删除
         </button>
+
+        <button type="primary" plain="true" bindtap="gotoGuessPrev"
+          data-match="{{match}}">竞猜预览</button>
     </form>
 </view>

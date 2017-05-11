@@ -25,3 +25,5 @@ nbdist/
 .nb-gradle/
 
 /config.js
+config.js
+images
